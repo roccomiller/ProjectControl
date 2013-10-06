@@ -1,0 +1,854 @@
+<?xml version="1.0"?>
+<ArrayOfLogEventDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <LogEventDefinition>
+    <ExtensionMethodName>UIServerStarted</ExtensionMethodName>
+    <LogEventDefinitionId>e57cc30d-c031-4369-ab56-ed1a478d2da0</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1388218Z</Created>
+    <EventCode>7.2.2.1.1.0.0</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Info</Severity>
+    <EventText>UI server started successfully.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>UIServerStopped</ExtensionMethodName>
+    <LogEventDefinitionId>19f66511-6364-429e-95f7-b4d23a36cfae</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1388218Z</Created>
+    <EventCode>7.2.2.1.2.0.0</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Info</Severity>
+    <EventText>UI server stopped successfully.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>PatientDataLoaded</ExtensionMethodName>
+    <LogEventDefinitionId>5dbb3f1a-9fb3-4cfb-95bb-62b87bcbc41c</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1388218Z</Created>
+    <EventCode>7.2.2.2.1.0.0</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Info</Severity>
+    <EventText>Patient data loaded successfully.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>SchedulerUnavailable</ExtensionMethodName>
+    <LogEventDefinitionId>0598ea1e-b0b6-41f8-a4f5-6ec8af9d1f1c</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1388218Z</Created>
+    <EventCode>7.2.11.41.1</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Error</Severity>
+    <EventText>Scheduler unavailable.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>DataManagerCommunicationError</ExtensionMethodName>
+    <LogEventDefinitionId>89a1f3ce-7bce-4e26-b2ca-5faf6c4aae1e</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1388218Z</Created>
+    <EventCode>7.2.11.61.1</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Error</Severity>
+    <EventText>In the communication between the DataManager and the InstrumentManager is an unidentified communication error occurred.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>InstrumentConnected</ExtensionMethodName>
+    <LogEventDefinitionId>b1b9e4f4-4037-43c5-9e89-5ee1e5e2b4a3</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1388218Z</Created>
+    <EventCode>7.2.11.11.1</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Info</Severity>
+    <EventText>The instrument is connected.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions>
+      <ParameterDescription>
+        <Index>0</Index>
+        <Name>messageNumber</Name>
+        <ObjectType>int</ObjectType>
+      </ParameterDescription>
+    </PropertyDescriptions>
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>InstrumentDisconnected</ExtensionMethodName>
+    <LogEventDefinitionId>dde89af3-2b67-4141-8d60-54ab18c98c7c</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.11.11.2</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Info</Severity>
+    <EventText>The instrument has been disconnected.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions>
+      <ParameterDescription>
+        <Index>0</Index>
+        <Name>messageNumber</Name>
+        <ObjectType>int</ObjectType>
+      </ParameterDescription>
+    </PropertyDescriptions>
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>CalculatorServiceStarted</ExtensionMethodName>
+    <LogEventDefinitionId>95942ff1-416c-4e24-823d-ab21f0b664ae</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.11.51.1</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Info</Severity>
+    <EventText>Calculator Service Started</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>CalculatorServiceStoped</ExtensionMethodName>
+    <LogEventDefinitionId>bf48e903-2cf8-4941-bf90-98ff5550dc95</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.11.51.2</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Info</Severity>
+    <EventText>Calculator Service Stoped</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>AirWaterCalibrationParamsNotAvailable</ExtensionMethodName>
+    <LogEventDefinitionId>9beb2c84-d6d5-4897-9108-444f4d867662</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.11.51.3</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Error</Severity>
+    <EventText>Air / Water Calibration params not available.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>FileSystemReadonly</ExtensionMethodName>
+    <LogEventDefinitionId>923d33ec-6e52-4979-8917-a29c20f46896</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.11.91.1</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Error</Severity>
+    <EventText>The file system is readonly. Dataexport not possible.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>BLDatabaseUnavailable</ExtensionMethodName>
+    <LogEventDefinitionId>bc175277-0afb-45d5-ba58-b398ab5632cf</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.11.2.1</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Fatal</Severity>
+    <EventText>Connection failed or Database not available.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>Maintenance</ExtensionMethodName>
+    <LogEventDefinitionId>e0d0d740-eb44-40e6-956c-92664a361fad</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.11.81.1</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Info</Severity>
+    <EventText>Maintenance Function Entry Point</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>ResourceManagerRSCFull</ExtensionMethodName>
+    <LogEventDefinitionId>13d19386-f24a-49b6-9698-d927b7d7a780</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.11.31.1</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Info</Severity>
+    <EventText>Reagent Storage Compartment full</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>ResourceManagerRackPosFull</ExtensionMethodName>
+    <LogEventDefinitionId>670ceb00-eeda-416e-a783-d5be97a85a97</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.11.31.2</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Info</Severity>
+    <EventText>No free rack position</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>SchedulerActivityDone</ExtensionMethodName>
+    <LogEventDefinitionId>dd433867-50a4-4cdd-8673-7dae9da7bc15</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.11.41.2</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Info</Severity>
+    <EventText>Scheduler activity done (see debug info).</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>SchedulerWorkflowAbnormalCase</ExtensionMethodName>
+    <LogEventDefinitionId>89afecba-8f0e-494b-827e-8c2145cec5d1</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.11.41.3</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Warn</Severity>
+    <EventText>Scheduler workflow abnormal case (see debug info).</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>SchedulerWorkflowException</ExtensionMethodName>
+    <LogEventDefinitionId>75ee7292-2478-4fac-a56f-e1e23a7c65f3</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.11.41.4</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Error</Severity>
+    <EventText>Scheduler workflow exception (see debug info).</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>SchedulerControlAbnormalCase</ExtensionMethodName>
+    <LogEventDefinitionId>1abc59f7-f9fe-4a7a-840e-b35ac940b32c</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.11.41.5</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Warn</Severity>
+    <EventText>Scheduler control abnormal case (see debug info).</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>SchedulerControlError</ExtensionMethodName>
+    <LogEventDefinitionId>aae959ef-5961-45a1-94e2-43dc0ab292cf</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.11.41.6</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Error</Severity>
+    <EventText>Scheduler control error (see debug info).</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>SchedulerControlException</ExtensionMethodName>
+    <LogEventDefinitionId>d2dbde9d-7a16-439a-bdc3-ba77b3dfe93a</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.11.41.7</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Error</Severity>
+    <EventText>Scheduler control exception (see debug info).</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>CalculatorActivityDone</ExtensionMethodName>
+    <LogEventDefinitionId>41811892-5932-4f91-bf28-9675d966eae9</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.11.51.4</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Info</Severity>
+    <EventText>Calculator activity done (see debug info).</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>CalculatorWorkflowAbnormalCase</ExtensionMethodName>
+    <LogEventDefinitionId>b7ab9827-adaa-40e7-86e5-876d7f1faf14</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.11.51.5</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Warn</Severity>
+    <EventText>Calculator workflow abnormal case (see debug info).</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>CalculatorWorkflowException</ExtensionMethodName>
+    <LogEventDefinitionId>646284a3-7896-495a-8ac3-c8374c125905</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.11.51.6</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Error</Severity>
+    <EventText>Calculator workflow exception (see debug info).</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>CalculatorControlAbnormalCase</ExtensionMethodName>
+    <LogEventDefinitionId>e49a9634-a6f9-4155-98c1-4953c4a47a9c</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.11.51.7</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Warn</Severity>
+    <EventText>Calculator control abnormal case (see debug info).</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>CalculatorControlError</ExtensionMethodName>
+    <LogEventDefinitionId>793210be-6612-4535-ba7f-7dc724cc36c2</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.11.51.8</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Error</Severity>
+    <EventText>Calculator control error (see debug info).</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>CalculatorControlException</ExtensionMethodName>
+    <LogEventDefinitionId>43bfad53-16d0-42a7-b793-6f92aa971a01</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.11.51.9</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Error</Severity>
+    <EventText>Calculator control exception (see debug info).</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>AnalyzerTemperatureOutOfRange</ExtensionMethodName>
+    <LogEventDefinitionId>ace6c6a4-a5b2-43f3-a2fd-f098d2eb2e82</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.11.11.3</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Error</Severity>
+    <EventText>The temperature of the analyzer is out of range.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions>
+      <ParameterDescription>
+        <Index>0</Index>
+        <Name>commandName</Name>
+        <ObjectType>system.string</ObjectType>
+      </ParameterDescription>
+    </PropertyDescriptions>
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>DataManagerInconsistentDataError</ExtensionMethodName>
+    <LogEventDefinitionId>0b8edb79-2cfa-43f0-aa46-d22473227ae8</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.11.61.2</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Warn</Severity>
+    <EventText>The data could possibly be inconsistent.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>RscTemperatureOutOfRange</ExtensionMethodName>
+    <LogEventDefinitionId>a6427a95-0d49-44aa-830c-00209dd5b609</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.11.11.4</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Error</Severity>
+    <EventText>The temperature of the RSC is out of range.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>DataManagerWorkflowStepInfo</ExtensionMethodName>
+    <LogEventDefinitionId>b50988ad-3685-4f96-bba8-37a7f34dd58d</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.11.61.3</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Info</Severity>
+    <EventText>The started import/export workflow finished successful.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>DataManagerWorkflowStepWarning</ExtensionMethodName>
+    <LogEventDefinitionId>8fd97954-6688-4d45-aee7-84c0469d7fc1</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.11.61.4</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Warn</Severity>
+    <EventText>The started import/export workflow finished with warnings.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>DataManagerWorkflowStepError</ExtensionMethodName>
+    <LogEventDefinitionId>5543e4b2-cf41-4604-9fb6-a1f282093aa1</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.11.61.5</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Error</Severity>
+    <EventText>The started import/export workflow could not be finished successful.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>HardwareError</ExtensionMethodName>
+    <LogEventDefinitionId>70104e9f-3d91-454d-ad99-7cc2759fa471</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.1.1.11.3</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Error</Severity>
+    <EventText>Hardware error occurred</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>MasterDataExportInfo</ExtensionMethodName>
+    <LogEventDefinitionId>e91c4689-a510-4ec2-a464-9b55b7f85dd5</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.2.3.1</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Info</Severity>
+    <EventText>The master data {0} was successfully exported.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions>
+      <ParameterDescription>
+        <Index>0</Index>
+        <Name>detail</Name>
+        <ObjectType>string</ObjectType>
+      </ParameterDescription>
+    </PropertyDescriptions>
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>MasterDataExportWarning</ExtensionMethodName>
+    <LogEventDefinitionId>95f81ac5-ecf1-4abf-8ed9-af1c24585703</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.2.3.2</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Warn</Severity>
+    <EventText>A problem occured during the export of the master data: {0}</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions>
+      <ParameterDescription>
+        <Index>0</Index>
+        <Name>warning</Name>
+        <ObjectType>string</ObjectType>
+      </ParameterDescription>
+    </PropertyDescriptions>
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>MasterDataExportError</ExtensionMethodName>
+    <LogEventDefinitionId>bad4d977-3457-4218-a2ad-2aa63db7d50f</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.2.3.3</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Error</Severity>
+    <EventText>An error occured during the export of the master data: {0}</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions>
+      <ParameterDescription>
+        <Index>0</Index>
+        <Name>error</Name>
+        <ObjectType>string</ObjectType>
+      </ParameterDescription>
+    </PropertyDescriptions>
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>UnknownApplicationParseError</ExtensionMethodName>
+    <LogEventDefinitionId>744c65f5-02e4-47ee-87cd-71f15508c3a6</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.3.0.1</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Error</Severity>
+    <EventText>Unknown error while parsing an application file. Please remove the corrupt application file from the TsnDrop folder.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>UnknownCalibratorParseError</ExtensionMethodName>
+    <LogEventDefinitionId>5ac465f2-a6bb-450a-9dbb-066653c972f3</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.3.0.2</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Error</Severity>
+    <EventText>Unknown error while parsing an calibrator file. Please remove the corrupt calibrator file from the TsnDrop folder.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>UnknownEWCParseError</ExtensionMethodName>
+    <LogEventDefinitionId>6ea7e82d-dafc-48ed-9c33-171264885500</LogEventDefinitionId>
+    <Created>2012-12-10T16:47:56.1398219Z</Created>
+    <EventCode>7.2.3.0.3</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Error</Severity>
+    <EventText>Unknown error while parsing an EWC file. Please remove the corrupt EWC file from the TsnDrop folder.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>PhotometerWavelengthsIntensity</ExtensionMethodName>
+    <LogEventDefinitionId>986b50cd-38e7-498e-8199-69f5665bb46b</LogEventDefinitionId>
+    <Created>2013-01-18T15:26:18.7174766+01:00</Created>
+    <EventCode>7.2.11.11.5</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Info</Severity>
+    <EventText>Wavelengths intensity of the photometer (see debug text)</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>ResendCalibrationResultError</ExtensionMethodName>
+    <LogEventDefinitionId>53596901-e267-4c1c-a0c6-12b5688cbb4e</LogEventDefinitionId>
+    <Created>2013-01-24T13:30:02.7431432+01:00</Created>
+    <EventCode>7.2.11.61.6</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Error</Severity>
+    <EventText>An error occured trying to resend the calibration result to the LIS. </EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>MasterDataIntegrityCheckFailed</ExtensionMethodName>
+    <LogEventDefinitionId>dc9e2c5c-389c-42a0-a621-dd458585df6d</LogEventDefinitionId>
+    <Created>2013-03-25T09:47:16.9324329+01:00</Created>
+    <EventCode>7.2.11.61.72</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Error</Severity>
+    <EventText>The integrity check failed for the master data file.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>ELibraryPackageNotSignedWithPKCS7</ExtensionMethodName>
+    <LogEventDefinitionId>30b01c6c-5ec0-44a5-b99b-e3b1c2afc188</LogEventDefinitionId>
+    <Created>2013-03-26T14:35:53.0773335+01:00</Created>
+    <EventCode>7.2.11.61.73</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>None</Severity>
+    <EventText>The signature check failed for the elibrary package.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>UnableToExtractContentOfSignedELibraryPackage</ExtensionMethodName>
+    <LogEventDefinitionId>2bf10b52-7dc5-446d-96f6-ea575c2495b4</LogEventDefinitionId>
+    <Created>2013-03-26T15:52:10.4567869+01:00</Created>
+    <EventCode>7.2.11.61.74</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>None</Severity>
+    <EventText>The unpacking of the signed elibrary failed.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>MasterDataExtractMetadataFailed</ExtensionMethodName>
+    <LogEventDefinitionId>f0f35841-2b7c-4a1c-8add-a22abcf9f756</LogEventDefinitionId>
+    <Created>2013-04-02T13:32:44.8715639+02:00</Created>
+    <EventCode>7.2.11.61.75</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Error</Severity>
+    <EventText>The extraction of metadata failed for the master data file.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>AnalyzerTemperatureBackInRange</ExtensionMethodName>
+    <LogEventDefinitionId>681be722-62a1-4f72-871e-f186cc14dba4</LogEventDefinitionId>
+    <Created>2013-04-17T15:32:56.1398219Z</Created>
+    <EventCode>7.2.11.11.6</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Info</Severity>
+    <EventText>The temperature of the analyzer is back in range.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>RscTemperatureBackInRange</ExtensionMethodName>
+    <LogEventDefinitionId>38f7676a-a51a-42bc-ae52-e1241b137b8b</LogEventDefinitionId>
+    <Created>2013-04-17T15:32:57.1398219Z</Created>
+    <EventCode>7.2.11.11.7</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Info</Severity>
+    <EventText>The temperature of the RSC is back in range.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>RsaScreenSharingServiceSessionShutDownWarningTime</ExtensionMethodName>
+    <LogEventDefinitionId>a0a5c783-2928-4422-bf99-acbd452c323b</LogEventDefinitionId>
+    <Created>2013-05-01T13:57:45.9385351+02:00</Created>
+    <EventCode>7.2.2.3.5</EventCode>
+    <IsAuditEvent>true</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Warn</Severity>
+    <EventText>ScreenSharing:The open session will shut down in 5 minutes.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>RsaScreenSharingServiceSessionShutDown</ExtensionMethodName>
+    <LogEventDefinitionId>2da6dc9d-dd87-490d-b285-1aa9d17a8fe1</LogEventDefinitionId>
+    <Created>2013-05-01T14:03:51.4723332+02:00</Created>
+    <EventCode>7.2.2.3.6</EventCode>
+    <IsAuditEvent>true</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Warn</Severity>
+    <EventText>ScreenSharing:The open session is shutting down.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>MasterDataUnknownParseError</ExtensionMethodName>
+    <LogEventDefinitionId>3311fc87-4f8f-44ce-8a9b-c97f0f258070</LogEventDefinitionId>
+    <Created>2013-05-06T12:08:51.4723332+02:00</Created>
+    <EventCode>7.2.2.3.7</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Error</Severity>
+    <EventText>Unknown error while parsing a master data file.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>ResourceManagerNoParameterFileFound</ExtensionMethodName>
+    <LogEventDefinitionId>b478fcb9-11f4-4b90-9303-9078c1af1087</LogEventDefinitionId>
+    <Created>2014-05-14T18:12:00+02:00</Created>
+    <EventCode>7.2.11.31.3</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Warn</Severity>
+    <EventText>Loaded unknown kit, container code {0}</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions>
+      <ParameterDescription>
+        <Index>0</Index>
+        <Name>ContainerCode</Name>
+        <ObjectType>string</ObjectType>
+      </ParameterDescription>
+    </PropertyDescriptions>
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>ResourceManagerUnableToLoadKit</ExtensionMethodName>
+    <LogEventDefinitionId>95d66f84-15f1-40a8-9869-badc9f9ffe69</LogEventDefinitionId>
+    <Created>2014-05-15T10:12:00+02:00</Created>
+    <EventCode>7.2.11.31.4</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Warn</Severity>
+    <EventText>Unable to load kit, container code {0}</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions>
+      <ParameterDescription>
+        <Index>0</Index>
+        <Name>ContainerCode</Name>
+        <ObjectType>string</ObjectType>
+      </ParameterDescription>
+    </PropertyDescriptions>
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>ResourceManagerKitLoaded</ExtensionMethodName>
+    <LogEventDefinitionId>78263a3d-1931-4ff8-8607-cfb62a9483cb</LogEventDefinitionId>
+    <Created>2014-05-15T11:07:00+02:00</Created>
+    <EventCode>7.2.11.31.5</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Info</Severity>
+    <EventText>Loaded kit, short name {0}, cassette number {1}.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions>
+      <ParameterDescription>
+        <Index>0</Index>
+        <Name>shortName</Name>
+        <ObjectType>string</ObjectType>
+      </ParameterDescription>
+      <ParameterDescription>
+        <Index>1</Index>
+        <Name>cassetteNumber</Name>
+        <ObjectType>string</ObjectType>
+      </ParameterDescription>
+    </PropertyDescriptions>
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>MasterDataFileIsInvalid</ExtensionMethodName>
+    <LogEventDefinitionId>AB86DC4F-1A51-47E6-AD11-71DFA7839BD6</LogEventDefinitionId>
+    <Created>2013-06-06T11:07:51.0000000+02:00</Created>
+    <EventCode>7.2.2.3.8</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Error</Severity>
+    <EventText>The master data file is invalid.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions />
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>AnalyzerUnitMaskingStatus</ExtensionMethodName>
+    <LogEventDefinitionId>996D531D-8064-43AD-A318-A32AAAC62190</LogEventDefinitionId>
+    <Created>2013-09-05T11:07:51.0000000+02:00</Created>
+    <EventCode>7.2.11.11.3</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Info</Severity>
+    <EventText>The analyzer unit {0} has a masking status of {1}.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions>
+      <ParameterDescription>
+        <Index>0</Index>
+        <Name>unitName</Name>
+        <ObjectType>string</ObjectType>
+      </ParameterDescription>
+      <ParameterDescription>
+        <Index>1</Index>
+        <Name>status</Name>
+        <ObjectType>string</ObjectType>
+      </ParameterDescription>
+    </PropertyDescriptions>
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>AnalyzerUnitStatus</ExtensionMethodName>
+    <LogEventDefinitionId>6857EA65-F2D4-4F1F-8B74-1BE37026EF93</LogEventDefinitionId>
+    <Created>2013-09-06T09:07:51.0000000+02:00</Created>
+    <EventCode>7.2.11.11.4</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Info</Severity>
+    <EventText>The analyzer unit {0} has changed state from {1} to {2}.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions>
+      <ParameterDescription>
+        <Index>0</Index>
+        <Name>unitName</Name>
+        <ObjectType>string</ObjectType>
+      </ParameterDescription>
+      <ParameterDescription>
+        <Index>1</Index>
+        <Name>originalState</Name>
+        <ObjectType>string</ObjectType>
+      </ParameterDescription>
+      <ParameterDescription>
+        <Index>2</Index>
+        <Name>newState</Name>
+        <ObjectType>string</ObjectType>
+      </ParameterDescription>
+    </PropertyDescriptions>
+  </LogEventDefinition>
+  <LogEventDefinition>
+    <ExtensionMethodName>AnalyzerUnitPresence</ExtensionMethodName>
+    <LogEventDefinitionId>D81F37B4-7DF1-4CE1-A8AC-FBF85614F6F8</LogEventDefinitionId>
+    <Created>2013-09-06T13:36:11.0000000+02:00</Created>
+    <EventCode>7.2.11.11.5</EventCode>
+    <IsAuditEvent>false</IsAuditEvent>
+    <ContainsSensitiveData>false</ContainsSensitiveData>
+    <Severity>Info</Severity>
+    <EventText>The analyzer unit {0} is {1}.</EventText>
+    <IsConfirmable>false</IsConfirmable>
+    <ShowCallout>false</ShowCallout>
+    <PropertyDescriptions>
+      <ParameterDescription>
+        <Index>0</Index>
+        <Name>unitName</Name>
+        <ObjectType>string</ObjectType>
+      </ParameterDescription>
+      <ParameterDescription>
+        <Index>1</Index>
+        <Name>present</Name>
+        <ObjectType>string</ObjectType>
+      </ParameterDescription>
+    </PropertyDescriptions>
+  </LogEventDefinition>
+</ArrayOfLogEventDefinition>
