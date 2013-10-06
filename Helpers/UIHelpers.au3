@@ -1,4 +1,4 @@
-#include-once 
+#include-once
 #include <GUIConstantsEx.au3>
 
 Global $ScriptPaused
@@ -14,7 +14,7 @@ Func CreateMsgBox($flag, $title, $text)
 EndFunc
 
 Func CreateGroup()
-   
+
 EndFunc
 
 Func CreateButton($text, $left, $top, $width, $height = $BTN_HEIGHT, $style = $BS_FLAT)
@@ -34,7 +34,7 @@ EndFunc
 Func EnableControls($arrayOfControls)
    SetControlState($arrayOfControls, $GUI_ENABLE)
 EndFunc
- 
+
 Func DisableAllControlls()
    DisableControls($TestCheckBoxes)
    DisableControls($SourceControlCheckBoxes)
@@ -44,7 +44,7 @@ Func DisableAllControlls()
    DisableControls($ActionButtons)
    DisableControls($CheckAllCheckBoxes)
 EndFunc
- 
+
 Func EnableAllControlls()
    EnableControls($TestCheckBoxes)
    EnableControls($SourceControlCheckBoxes)
@@ -135,7 +135,7 @@ Func SleepWithStatusUpdate($time, $animation = False)
 		 EndIf
 		 $newMsg = $oldMsg & $AnimationCharacters[$animationCounter]
 		 $animationCounter += 1
-	  EndIf	  
+	  EndIf
 	  UpdateStatusBarMsg($newMsg)
 	  Sleep(200)
 	  $timeout += 200
@@ -157,7 +157,7 @@ Func SleepWithStatusUpdatePercentage($time, $animation = False)
 		 EndIf
 		 $newMsg = $oldMsg & " [" & $percentage & "%]"
 		 $percentage = Round($timeout / $time * 100, 0)
-	  EndIf	  
+	  EndIf
 	  UpdateStatusBarMsg($newMsg)
 	  Sleep(100)
 	  $timeout += 500

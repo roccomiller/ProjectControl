@@ -21,12 +21,12 @@ Main()
 
 Func Main()
 	Global $hMainGUI = GUICreate("Snipet test gui", 800, 800)
-	GUISetIcon(@ScriptFullPath, -5)
+	GUISetIcon($ResourceFile, -5)
 
 	#region snipet
 	;#include "TabWithIcon.au3"
-	;#include "ToolTip.au3"
-	#include "ButtonWithIcon.au3"
+	#include "ToolTip.au3"
+	;#include "ButtonWithIcon.au3"
 	#endregion snipet
 
 	GUISetState(@SW_SHOWNORMAL, $hMainGUI)

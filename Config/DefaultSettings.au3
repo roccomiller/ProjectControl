@@ -62,8 +62,21 @@ Global Const $BTN_ACTIONSSTART_WIDTH = 100
 Global Const $BTN_ACTIONSSTART_TOP = $TAB_GROUP_TOP + $TAB_GROUP_HEIGHT - $BTN_HEIGHT - 5
 Global Const $BTN_ACTIONSSTART_LEFT = $TAB_GROUP_LEFT + 5
 
-Global Const $CBX_HEIGHT = 20
+Global Const $CBX_HEIGHT = 17
 Global Const $CBX_CHECKALL_TOP = $BTN_ACTIONSSTART_TOP - $BTN_HEIGHT
+
+Global Const $ICON_HELP_HEIGHT = 16
 
 #endregion UI settings
 
+#region DON'T CHANGE THIS VALUES IF YOU DON'T KNOW WHAT YOU DO!
+Global $hStatusBar, $SystemStatus, $OldSystemStatus, $ScriptPaused
+Global $ResourceFile = @ScriptFullPath
+Global $TestCheckBoxes[1], $SourceControlCheckBoxes[1], $PreparationCheckBoxes[1], $RoundtripsCheckBoxes[1], $BackupCheckBoxes[1], $CheckAllCheckBoxes[1]
+Global $ActionButtons[1]
+Global $includeTest = True
+Global $includeSourcControl = True
+Global $includePreparation = True
+Global $includeRoundtrips = True
+Global $includeBackup = True
+#endregion

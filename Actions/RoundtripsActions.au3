@@ -1,4 +1,11 @@
 
+;~ Declare all used checkboxes here to prevent warnings in the usage
+#region Checkbox declaration
+Global $CBX_Roundtrips_Dummy
+
+Global $CBX_Roundtrips_All
+#endregion Checkbox declaration
+
 Func RoundtripsAction_Click()
    If GUICtrlRead($CBX_Roundtrips_Dummy) = $GUI_CHECKED Then
 	  RunTest_Roundtrips()
@@ -6,5 +13,5 @@ Func RoundtripsAction_Click()
 EndFunc
 
 Func RunTest_Roundtrips()
-   
+
 EndFunc

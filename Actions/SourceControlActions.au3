@@ -1,4 +1,17 @@
 
+;~ Declare all used checkboxes here to prevent warnings in the usage
+#region Checkbox declaration
+Global $CBX_SourceControl_UndoAllPendingChanges
+Global $CBX_SourceControl_RemoveDev
+Global $CBX_SourceControl_GetLatest
+Global $CBX_SourceControl_GetTheDependecies
+Global $CBX_SourceControl_BuildIMSolution
+Global $CBX_SourceControl_RemoveComitServices
+Global $CBX_SourceControl_AdaptTheConfigFiles
+
+Global $CBX_SourceControl_All
+#endregion Checkbox declaration
+
 Func SourceControlAction_Click()
    DisableAllControlls()
    Local $previousActaionResult = 1
@@ -43,7 +56,7 @@ Func UndoAllPendingChanges()
 	  Return -1
    EndIf
    Return 1
-EndFunc  
+EndFunc
 
 Func RemoveDev()
    SetSystemStatus("Running", "Removing folders in selected branch.")
@@ -112,7 +125,7 @@ Func BuildIMSolution()
 	  EndIf
    Else
 	  BuildIMSolutionDebugNoTests()
-   EndIf   
+   EndIf
    SetSystemStatus("Ready", "C4000 solution successfully buildet.")
    Return 1
 EndFunc
@@ -135,7 +148,7 @@ Func RemoveComitServices()
    While ProcessExists($cmdPit)
 	  SleepWithStatusUpdate(4000, True)
    WEnd
-;~    
+;~
 ;~    Run("DeployComitServices.exe " & $CurrentBasePath)
 ;~    While ProcessExists("DeployComitServices.exe")
 ;~ 	  SleepWithStatusUpdate(4000, True)

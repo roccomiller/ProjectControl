@@ -1,30 +1,24 @@
-#include-once
-#include <date.au3>
-#include <Array.au3>
-;#include <File.au3>
-#include <..\Libraries\_XMLDomWrapper.au3>
-#include "..\Config\DefaultSettings.au3"
 
 Func Initialize()
-   Global $TestCheckBoxes[1]
-   Global $SourceControlCheckBoxes[1]
-   Global $PreparationCheckBoxes[1]
-   Global $RoundtripsCheckBoxes[1]
-   Global $BackupCheckBoxes[1]
-   Global $CheckAllCheckBoxes[1]
-   Global $ActionButtons[1]
-   
-   Global $includeTest = True
-   Global $includeSourcControl = True
-   Global $includePreparation = True
-   Global $includeRoundtrips = True
-   Global $includeBackup = True   
+   LoadSettings()
    If $CurrentEnvironment = $Environments[0] Then ; Development
-	  
+
    ElseIf $CurrentEnvironment = $Environments[1] Then ; ControlUnit
 	  $includeTest = False ; Turn off the test tab
 	  $includeSourcControl = False ; Turn off the source control tab
+  EndIf
+   If Not @Compiled Then
+	  $ResourceFile = StringReplace($ResourceFile, ".au3", ".exe", 1)
    EndIf
+   WriteLog("=================================================================")
+   WriteLog("UI started")
+   WriteLog("=================================================================")
+EndFunc
+
+Func Deinitialize()
+   WriteLog("=================================================================")
+   WriteLog("UI closed")
+   WriteLog("=================================================================")
 EndFunc
 
 Func LoadSettings()
@@ -58,7 +52,9 @@ Func CreateSettings()
 EndFunc
 
 Func LoadDefaultSettings()
-   MsgBox(64, "LoadDefaultSettings", $TEXT_NOTIMPLEMETEDYET)
+	If IsDeclared($TEXT_NOTIMPLEMETEDYET) Then
+		MsgBox(64, "LoadDefaultSettings", $TEXT_NOTIMPLEMETEDYET)
+	EndIf
 EndFunc
 
 Func KillAllProcesses()
