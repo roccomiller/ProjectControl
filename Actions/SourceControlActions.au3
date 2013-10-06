@@ -188,7 +188,6 @@ Func AdaptTheConfigFiles()
    Return 1
 EndFunc
 
-
 Func RunTest_SourceControl2()
    ;#requireAdmin
    $pid = RunWait("Test.bat")

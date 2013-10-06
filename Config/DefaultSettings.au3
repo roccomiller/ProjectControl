@@ -2,6 +2,8 @@
 
 Global Const $SettingsFileName = @ScriptDir & "\settings.xml"
 Global Const $LogFileName = @ScriptDir & "\log.txt"
+Global $UseICSimulator[3] = ["Use IC Simulator", "Use IC Simulator, but ask", "Do not use IC Simulator"]
+Global $CurrentUseICSimulator = $UseICSimulator[0]
 Global $Environments[2] = ["Development", "ControlUnit"]
 Global $CurrentEnvironment = $Environments[0]
 ;~ C4000 folder structure settings
@@ -12,14 +14,6 @@ Global Const $c302AppFolder = $CurrentBasePath & "Environment\MasterData\RT\c302
 Global Const $e201AppFolder = $CurrentBasePath & "Environment\MasterData\RT\e201\"
 Global Const $iseAppFolder = $CurrentBasePath & "Environment\MasterData\RT\ISE\"
 Global Const $MasterDataFilePrefix = "cobas4000_"
-
-;~ C4000 process settings
-Global $IMProcesses_ProcessManager = "ProcessManager.exe"
-Global $IMProcesses_Scheduler = "Scheduler.exe"
-Global $IMProcesses_Calculator = "Calculator.exe"
-Global $IMProcesses_UIServer = "UIServer.exe"
-Global $IMProcesses_ResourceManager = "ResourceManager.exe"
-Global $IMProcesses_InstrumentAccess = "InstrumentAccess.exe"
 
 ;~ Process names
 Global Const $ICSimulatorProcessName = "ICSimulator.exe"

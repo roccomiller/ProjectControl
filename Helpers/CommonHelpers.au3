@@ -26,6 +26,7 @@ Func LoadSettings()
 	  CreateSettings()
    EndIf
    _XMLFileOpen($SettingsFileName)
+   Global $CurrentUseICSimulator = _XMLGetAttrib("/c4000AutoItSettings/UseICSimulator", "Use")
    Global $CurrentBasePath = _XMLGetAttrib("/c4000AutoItSettings/BasePath", "Path")
    Global $CurrentEnvironment = _XMLGetAttrib("/c4000AutoItSettings/Environment", "System")
 EndFunc
@@ -35,6 +36,7 @@ Func SaveSettings()
 	  CreateSettings()
    EndIf
    _XMLFileOpen($SettingsFileName)
+   _XMLSetAttrib("/c4000AutoItSettings/UseICSimulator", "Use", $CurrentUseICSimulator)
    _XMLSetAttrib("/c4000AutoItSettings/BasePath", "Path", $CurrentBasePath)
    _XMLSetAttrib("/c4000AutoItSettings/Environment", "System", $CurrentEnvironment)
 EndFunc
@@ -42,8 +44,9 @@ EndFunc
 Func CreateSettings()
    _XMLCreateFile($SettingsFileName, "c4000AutoItSettings", True)
    _XMLFileOpen($SettingsFileName)
-   _XMLCreateChildNodeWAttr("//c4000AutoItSettings" , "Environment", "System", $CurrentEnvironment)
-   _XMLCreateChildNodeWAttr("//c4000AutoItSettings" , "BasePath", "Path", $CurrentBasePath)
+   _XMLCreateChildNodeWAttr("//c4000AutoItSettings", "UseICSimulator", "Use", $CurrentUseICSimulator)
+   _XMLCreateChildNodeWAttr("//c4000AutoItSettings", "Environment", "System", $CurrentEnvironment)
+   _XMLCreateChildNodeWAttr("//c4000AutoItSettings", "BasePath", "Path", $CurrentBasePath)
    _XMLCreateChildNode("//c4000AutoItSettings", "IMProcesses")
    For $i = 0 To UBound($IMProcesses) - 1
 	  _XMLCreateChildNodeWAttr("//c4000AutoItSettings/IMProcesses", "IMProcess", "Name", $IMProcesses[$i])

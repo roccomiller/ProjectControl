@@ -1,3 +1,24 @@
+#region PopUps
+Global Const $TXT_POPUP_SETTINGS_Settings = "Settings"
+
+Global Const $TXT_POPUP_SETTINGS_UseICSimulator = "Use IC Simulator: "
+Global Const $TXT_POPUP_SETTINGS_UseICSimulator_Help = _
+$UseICSimulator[0] & ": " & @TAB & @TAB & "Perform simulator actions (eg. load rack or kit) without asking." _
+& @CRLF & $UseICSimulator[1] & ": " & @TAB & "Perform simulator actions, but ask before it starts." _
+& @CRLF & $UseICSimulator[2] & ": " & @TAB & "Do not perform simulator actions, but wait (and tell user) if one is needed. This is used for the real instrument."
+
+Global Const $TXT_POPUP_SETTINGS_Environment = "Environment: "
+Global Const $TXT_POPUP_SETTINGS_Environment_Help = _
+$Environments[0] & ": " & @TAB & "If selected, you can use all the functions (Source control etc.)" _
+& @CRLF & $Environments[1] & ": " & @TAB & "If selected, some functions are disabled or hidden because they do not make sense on the control unit."
+
+
+Global Const $TXT_POPUP_SETTINGS_BasePath = "Base path: "
+Global Const $TXT_POPUP_SETTINGS_BasePath_Help = "This is the base path to your branch. Usually the parent folder of the 'Units' Folder where your Roche.c4000.sln is located."
+
+Global Const $TXT_POPUP_SETTINGS_SelectBasePath = "Choose..."
+#endregion PopUps
+
 #region Tabs
 
 #region Test Tab
@@ -59,6 +80,9 @@ Global Const $TEXT_TAB_BACKUP_CBX_CheckAll_ToolTip = "This will check / uncheck 
 
 #region Buttons
 Global Const $TEXT_BTN_StartAction = "Start"
+Global Const $TEXT_BTN_Save = "Save"
+Global Const $TEXT_BTN_Cancel = "Cancel"
+Global Const $TEXT_BTN_Default = "Default"
 #endregion Buttons
 
 Global Const $TEXT_NOTIMPLEMETEDYET = "Not implemented yet..."

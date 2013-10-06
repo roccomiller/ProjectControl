@@ -17,6 +17,19 @@ Func CreateGroup()
 
 EndFunc
 
+Func ConvertArrayToComboBoxString($values)
+	Local $string = ""
+	If IsArray($values) Then
+	   For $i = 1 To UBound($values) - 1
+		  If $i > 1 Then
+			 $string &= "|"
+		  EndIf
+		  $string &= $values[$i]
+	  Next
+	EndIf
+	Return $string
+EndFunc
+
 Func CreateButton($text, $left, $top, $width, $height = $BTN_HEIGHT, $style = $BS_FLAT)
    Return GUICtrlCreateButton($text, $left, $top, $width, $height, $style)
 EndFunc

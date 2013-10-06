@@ -102,32 +102,40 @@ EndFunc
 Func ShowSettingsPopup()
    Local $popupWidth = 500
    Local $popupHeight = 300
-   Local $ColumsLeft[3] = [10, 90, 370]
+   Local $ColumsLeft[4] = [10, 110, 390, 460]
    Local $marginTop = 10
    Local $lineHeight = 25
-   Local $labelWidth = 80
-   Local $settingsPopup = GUICreate("Settings", $popupWidth, $popupHeight)
+   Local $labelWidth = 100
+   Local $settingsPopup = GUICreate($TXT_POPUP_SETTINGS_Settings, $popupWidth, $popupHeight)
+   ;~ Select if you want to use the simulator or not
+   #region Simulator usage
+   GUICtrlCreateLabel($TXT_POPUP_SETTINGS_UseICSimulator, $ColumsLeft[0], $marginTop + (0 * $lineHeight), $labelWidth, 20)
+   Local $newUseICSimulator = $CurrentUseICSimulator
+   Local $UseICSimulatorInput = GUICtrlCreateCombo($UseICSimulator[0], $ColumsLeft[1], $marginTop + (0 * $lineHeight), 280, 20)
+   GUICtrlSetData($UseICSimulatorInput, ConvertArrayToComboBoxString($UseICSimulator), $CurrentUseICSimulator)
+   Local $hHelpIcon_UseICSimulator = GUICtrlCreateIcon($ResourceFile, -6, $ColumsLeft[3], $marginTop + (0 * $lineHeight), $ICON_HELP_HEIGHT, $ICON_HELP_HEIGHT)
+   GUICtrlSetTip($hHelpIcon_UseICSimulator, $TXT_POPUP_SETTINGS_UseICSimulator_Help)
+   #endregion Simulator usage
+
    ;~ Select the current environment
    #region environment settings
-   GUICtrlCreateLabel("Environment: ", $ColumsLeft[0], $marginTop + (0 * $lineHeight), $labelWidth, 20)
+   GUICtrlCreateLabel($TXT_POPUP_SETTINGS_Environment, $ColumsLeft[0], $marginTop + (1 * $lineHeight), $labelWidth, 20)
    Local $newEnvironment = $CurrentEnvironment
-   Local $EnvironmentInput = GUICtrlCreateCombo($Environments[0], $ColumsLeft[1], $marginTop + (0 * $lineHeight), 280, 20)
-   Local $environmentValues
-   For $i = 1 To UBound($Environments) - 1
-	  If $i > 1 Then
-		 $environmentValues &= "|"
-	  EndIf
-	  $environmentValues &= $Environments[$i]
-   Next
-   GUICtrlSetData($EnvironmentInput, $environmentValues, $CurrentEnvironment)
+   Local $EnvironmentInput = GUICtrlCreateCombo($Environments[0], $ColumsLeft[1], $marginTop + (1 * $lineHeight), 280, 20)
+   GUICtrlSetData($EnvironmentInput, ConvertArrayToComboBoxString($Environments), $CurrentEnvironment)
+   Local $hHelpIcon_EnvironmentInput = GUICtrlCreateIcon($ResourceFile, -6, $ColumsLeft[3], $marginTop + (1 * $lineHeight), $ICON_HELP_HEIGHT, $ICON_HELP_HEIGHT)
+   GUICtrlSetTip($hHelpIcon_EnvironmentInput, $TXT_POPUP_SETTINGS_Environment_Help)
    #endregion environment settings
 
    ;~ Select the base path
    #region base path settings
    Local $newBasePath = $CurrentBasePath
-   GUICtrlCreateLabel("Base path: ", $ColumsLeft[0], $marginTop + (1 * $lineHeight), $labelWidth, 20)
-   Local $BasePathInput = GUICtrlCreateLabel($CurrentBasePath, $ColumsLeft[1], $marginTop + (1 * $lineHeight), 280, 20)
-   Local $BTN_SelectBasepath = CreateButton("Choose...", $ColumsLeft[2], $marginTop + (1 * $lineHeight), 60)
+   GUICtrlCreateLabel($TXT_POPUP_SETTINGS_BasePath, $ColumsLeft[0], $marginTop + (2 * $lineHeight), $labelWidth, 20)
+   Local $BasePathInput = GUICtrlCreateLabel($CurrentBasePath, $ColumsLeft[1], $marginTop + (2 * $lineHeight), 280, 20)
+   Local $BTN_SelectBasepath = CreateButton($TXT_POPUP_SETTINGS_SelectBasePath, $ColumsLeft[2], $marginTop + (2 * $lineHeight), 60)
+   Local $hHelpIcon_SelectBasepath = GUICtrlCreateIcon($ResourceFile, -6, $ColumsLeft[3], $marginTop + (2 * $lineHeight), $ICON_HELP_HEIGHT, $ICON_HELP_HEIGHT)
+   Local $helpText_SelectBasepath = $TXT_POPUP_SETTINGS_BasePath_Help
+   GUICtrlSetTip($hHelpIcon_SelectBasepath, $helpText_SelectBasepath)
    #endregion base path settings
 
 
@@ -135,20 +143,25 @@ Func ShowSettingsPopup()
    ;Local $IMProcesses = GUICtrlCreateCombo($IMProcesses_ProcessManager, $ColumsLeft[1], $marginTop + (2 * $lineHeight), 280, 20)
    ;GUICtrlSetData(-1, $IMProcesses_Scheduler & "|" & $IMProcesses_Calculator & "|" & $IMProcesses_UIServer & "|" & $IMProcesses_ResourceManager & "|" & $IMProcesses_InstrumentAccess, $IMProcesses_ProcessManager)
 
-   Local $BTN_SaveSettings = CreateButton("Save", $ColumsLeft[0], $popupHeight - $BTN_HEIGHT, 150); GUICtrlCreateButton("&Save", 10, $popupHeight - $BTN_HEIGHT, 150, $BTN_Height, $BS_FLAT)
-   Local $BTN_DiscardSettings = CreateButton("Cancel", $ColumsLeft[0] + 150 + 10, $popupHeight - $BTN_HEIGHT, 150)
-   Local $BTN_LoadDefaultSettings = CreateButton("Default", $ColumsLeft[0] + 150 + 10 + 150 + 10, $popupHeight - $BTN_HEIGHT, 150)
+   Local $BTN_SaveSettings = CreateButton($TEXT_BTN_Save, $ColumsLeft[0], $popupHeight - $BTN_HEIGHT, 150); GUICtrlCreateButton("&Save", 10, $popupHeight - $BTN_HEIGHT, 150, $BTN_Height, $BS_FLAT)
+   Local $BTN_DiscardSettings = CreateButton($TEXT_BTN_Cancel, $ColumsLeft[0] + 150 + 10, $popupHeight - $BTN_HEIGHT, 150)
+   Local $BTN_LoadDefaultSettings = CreateButton($TEXT_BTN_Default, $ColumsLeft[0] + 150 + 10 + 150 + 10, $popupHeight - $BTN_HEIGHT, 150)
 
    GUISetState(@SW_SHOW, $settingsPopup)
    While 1
 	  Local $msg = GUIGetMsg()
 	  Switch $msg
+		Case $UseICSimulatorInput
+			$newUseICSimulator = GUICtrlRead($UseICSimulatorInput)
 		 Case $EnvironmentInput
 			$newEnvironment = GUICtrlRead($EnvironmentInput)
 		 Case $BTN_SelectBasepath
 			$newBasePath = FileSelectFolder("Select the base foler of your branch.", "C:\") & "\"
-			GUICtrlSetData($BasePathInput, $newBasePath)
-		 Case $BTN_SaveSettings
+			If FileExists($newBasePath) And Not ($newBasePath = "\") Then
+				GUICtrlSetData($BasePathInput, $newBasePath)
+			EndIf
+		Case $BTN_SaveSettings
+			$CurrentUseICSimulator = $newUseICSimulator
 			$CurrentEnvironment = $newEnvironment
 			$CurrentBasePath = $newBasePath
 			SaveSettings()
