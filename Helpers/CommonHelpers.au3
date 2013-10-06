@@ -9,11 +9,33 @@ Func Initialize()
   EndIf
    If Not @Compiled Then
 	  $ResourceFile = StringReplace($ResourceFile, ".au3", ".exe", 1)
-   EndIf
+  EndIf
+  Global $StatusBarIcons[7] = [ _
+  _WinAPI_ExtractIcon($ResourceFile, 5, 0), _
+  _WinAPI_ExtractIcon($ResourceFile, 6, 0), _
+  _WinAPI_ExtractIcon($ResourceFile, 7, 0), _
+  _WinAPI_ExtractIcon($ResourceFile, 8, 0), _
+  _WinAPI_ExtractIcon($ResourceFile, 9, 0), _
+  _WinAPI_ExtractIcon($ResourceFile, 10, 0), _
+  _WinAPI_ExtractIcon($ResourceFile, 11, 0) _
+  ]
    WriteLog("=================================================================")
    WriteLog("UI started")
    WriteLog("=================================================================")
 EndFunc
+
+Func _WinAPI_ExtractIcon($sFile, $iIndex, $iSize=0)
+	Local $hIcon = DllStructCreate("ptr"), $result
+	Switch $iSize
+		Case 1
+			$result = _WinAPI_ExtractIconEx($sFile, $iIndex, DllStructGetPtr($hIcon), 0, 1)
+		Case 0
+			$result = _WinAPI_ExtractIconEx($sFile, $iIndex, 0, DllStructGetPtr($hIcon), 1)
+	EndSwitch
+	If $result=0 Then Return SetError(1,0,0)
+	Return DllStructGetData($hIcon,1)
+EndFunc
+
 
 Func Deinitialize()
    WriteLog("=================================================================")

@@ -81,45 +81,50 @@ Func ResetSystemStatus()
 EndFunc
 
 Func SetSystemStatus($status, $msg = "")
-   Local $icon = 324
+   Local $icon = 0
    Switch $status
 		Case "Ready"
-			$icon = 112
+			$icon = 1
 			If $msg = "" Then
 				$msg = "Up and ready..."
 			EndIf
 		Case "Waiting"
-			$icon = 23
+			$icon = 2
 			If $msg = "" Then
 				$msg = "Waiting for your input or action..."
 			EndIf
 		Case "Running"
-			$icon = 137
+			$icon = 3
 			If $msg = "" Then
 				$msg = "Runnin some action, please wait..."
 			EndIf
 		Case "Info"
-			$icon = 221
+			$icon = 4
 			If $msg = "" Then
 				$msg = "Good to know..."
 			EndIf
 		Case "Warning"
-			$icon = 208
+			$icon = 5
 			If $msg = "" Then
 				$msg = "Just take care..."
 			EndIf
 		Case "Error"
-			$icon = 131
+			$icon = 6
 			If $msg = "" Then
 				$msg = "Ups! Something seems to cause an error..."
 			EndIf
+		Case "Success"
+			$icon = 7
+			If $msg = "" Then
+				$msg = "Action was successful finished."
+			EndIf
 		Case Else
-			$icon = 23
+			$icon = 8
 			If $msg = "" Then
 				$msg = "..."
 			EndIf
-   EndSwitch
-   _GUICtrlStatusBar_SetIcon($hStatusBar, 0, _WinAPI_LoadShell32Icon($icon))
+	EndSwitch
+   _GUICtrlStatusBar_SetIcon($hStatusBar, 0, $StatusBarIcons[$icon])
    _GUICtrlStatusBar_SetText($hStatusBar, $status, 1)
    UpdateStatusBarMsg($msg)
    $OldSystemStatus = $SystemStatus

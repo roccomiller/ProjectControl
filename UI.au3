@@ -1,6 +1,13 @@
 #Region ;**** Directives created by AutoIt3Wrapper_GUI ****
-#AutoIt3Wrapper_Res_Icon_Add=Images\Jahshaka.ico ; Icon number -5
-#AutoIt3Wrapper_Res_Icon_Add=Images\Help.ico ; Icon number -6
+#AutoIt3Wrapper_Res_Icon_Add=Images\Jahshaka.ico; Icon number -5
+#AutoIt3Wrapper_Res_Icon_Add=Images\Help.ico	; Icon number -6
+#AutoIt3Wrapper_Res_Icon_Add=Images\Ready.ico	; Icon number -7
+#AutoIt3Wrapper_Res_Icon_Add=Images\Waiting.ico	; Icon number -8
+#AutoIt3Wrapper_Res_Icon_Add=Images\Running.ico	; Icon number -9
+#AutoIt3Wrapper_Res_Icon_Add=Images\Info.ico	; Icon number -10
+#AutoIt3Wrapper_Res_Icon_Add=Images\Warning.ico	; Icon number -11
+#AutoIt3Wrapper_Res_Icon_Add=Images\Error.ico	; Icon number -12
+#AutoIt3Wrapper_Res_Icon_Add=Images\Success.ico	; Icon number -13
 ;#AutoIt3Wrapper_Res_File_Add=Background.jpg, rt_rcdata, RES_BACKGROUND_JPG
 #AutoIt3Wrapper_Outfile_x64=UI.exe
 #EndRegion ;**** Directives created by AutoIt3Wrapper_GUI ****
