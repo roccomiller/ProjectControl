@@ -1,7 +1,14 @@
 ;~
 
+Global $ScriptPaused
+HotKeySet("{ESC}", "Terminate")
+HotKeySet("{PAUSE}", "TogglePause")
+HotKeySet("{F1}", "ShowHelpFile")
+
 Global Const $SettingsFileName = @ScriptDir & "\settings.xml"
 Global Const $LogFileName = @ScriptDir & "\log.txt"
+Global Const $DocumentationFileName = @ScriptDir & "\Documentation\Documentation.chm"
+Global $CurrentUserPostfix = ""
 Global $UseICSimulator[3] = ["Use IC Simulator", "Use IC Simulator, but ask", "Do not use IC Simulator"]
 Global $CurrentUseICSimulator = $UseICSimulator[0]
 Global $Environments[2] = ["Development", "ControlUnit"]
@@ -16,6 +23,7 @@ Global Const $iseAppFolder = $CurrentBasePath & "Environment\MasterData\RT\ISE\"
 Global Const $MasterDataFilePrefix = "cobas4000_"
 
 ;~ Process names
+Global Const $ICSimulatorPath = $CurrentBasePath & "Environment\InstrumentSimulator\"
 Global Const $ICSimulatorProcessName = "ICSimulator.exe"
 Global $IMProcesses[9]
 $IMProcesses[0] = "Roche.C4000.ProcessManagement.ProcessManager.exe"

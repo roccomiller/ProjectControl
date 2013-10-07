@@ -36,7 +36,6 @@ Func _WinAPI_ExtractIcon($sFile, $iIndex, $iSize=0)
 	Return DllStructGetData($hIcon,1)
 EndFunc
 
-
 Func Deinitialize()
    WriteLog("=================================================================")
    WriteLog("UI closed")
@@ -48,6 +47,7 @@ Func LoadSettings()
 	  CreateSettings()
    EndIf
    _XMLFileOpen($SettingsFileName)
+   Global $CurrentUserPostfix = _XMLGetAttrib("/c4000AutoItSettings/UserPosfix", "Postfix")
    Global $CurrentUseICSimulator = _XMLGetAttrib("/c4000AutoItSettings/UseICSimulator", "Use")
    Global $CurrentBasePath = _XMLGetAttrib("/c4000AutoItSettings/BasePath", "Path")
    Global $CurrentEnvironment = _XMLGetAttrib("/c4000AutoItSettings/Environment", "System")
@@ -58,6 +58,7 @@ Func SaveSettings()
 	  CreateSettings()
    EndIf
    _XMLFileOpen($SettingsFileName)
+   _XMLSetAttrib("/c4000AutoItSettings/UserPosfix", "Postfix" , $CurrentUserPostfix)
    _XMLSetAttrib("/c4000AutoItSettings/UseICSimulator", "Use", $CurrentUseICSimulator)
    _XMLSetAttrib("/c4000AutoItSettings/BasePath", "Path", $CurrentBasePath)
    _XMLSetAttrib("/c4000AutoItSettings/Environment", "System", $CurrentEnvironment)
@@ -66,6 +67,7 @@ EndFunc
 Func CreateSettings()
    _XMLCreateFile($SettingsFileName, "c4000AutoItSettings", True)
    _XMLFileOpen($SettingsFileName)
+   _XMLCreateChildNodeWAttr("//c4000AutoItSettings", "UserPosfix", "Postfix", $CurrentUserPostfix)
    _XMLCreateChildNodeWAttr("//c4000AutoItSettings", "UseICSimulator", "Use", $CurrentUseICSimulator)
    _XMLCreateChildNodeWAttr("//c4000AutoItSettings", "Environment", "System", $CurrentEnvironment)
    _XMLCreateChildNodeWAttr("//c4000AutoItSettings", "BasePath", "Path", $CurrentBasePath)
@@ -101,6 +103,21 @@ Func WriteLog($logMessage, $severity = "Debug")
    Local $prefix = @YEAR & "-" & @MON & "-" & @MDAY & " " & @HOUR & ":" & @MIN & ":" & @SEC & "." & @MSEC & ": [" & $severity & "] "
    FileWriteLine($logFile, $prefix & $logMessage)
    FileClose($logFile)
+EndFunc
+
+Func OpenLogFile()
+	Run("cmd /c start " & $LogFileName)
+EndFunc
+
+Func ClearLogFile()
+	FileDelete($LogFileName)
+	FileOpen($LogFileName, 1)
+EndFunc
+
+Func ShowHelpFile()
+	;~ must be hardcoded, FileInstall does not accept variables.
+	FileInstall("Documentation\Documentation.chm", "Help.chm")
+	Run("cmd /c start " &  @ScriptDir & "\Help.chm")
 EndFunc
 
 Func TogglePause()

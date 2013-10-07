@@ -28,6 +28,9 @@ If $includeSourcControl Then
    Global $CBX_SourceControl_All = GUICtrlCreateCheckbox($TEXT_TAB_SOURCECONTROL_CBX_CheckAll, $TAB_GROUP_LEFT + 5, $CBX_CHECKALL_TOP, $TAB_GROUP_WIDTH - 10, $CBX_HEIGHT)
    GUICtrlSetTip($CBX_SOURCECONTROL_All, $TEXT_TAB_SOURCECONTROL_CBX_CheckAll_ToolTip)
    _ArrayAdd($CheckAllCheckBoxes, $CBX_SourceControl_All)
+   GUICtrlSetOnEvent($CBX_SourceControl_All, "SetSourceControlCheckBoxState")
+
    Global $BTN_SourceControlAction_Click = CreateButton($TEXT_BTN_StartAction, $BTN_ACTIONSSTART_LEFT, $BTN_ACTIONSSTART_TOP, $BTN_ACTIONSSTART_WIDTH)
    _ArrayAdd($ActionButtons, $BTN_SourceControlAction_Click)
+   GUICtrlSetOnEvent($BTN_SourceControlAction_Click ,"SourceControlAction_Click")
 EndIf

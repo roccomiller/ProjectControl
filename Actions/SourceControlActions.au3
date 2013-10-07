@@ -12,32 +12,37 @@ Global $CBX_SourceControl_AdaptTheConfigFiles
 Global $CBX_SourceControl_All
 #endregion Checkbox declaration
 
+Func SetSourceControlCheckBoxState()
+	SetCheckBoxState($SourceControlCheckBoxes, GUICtrlRead($CBX_SourceControl_All))
+EndFunc
+
 Func SourceControlAction_Click()
    DisableAllControlls()
-   Local $previousActaionResult = 1
-   If GUICtrlRead($CBX_SourceControl_UndoAllPendingChanges) = $GUI_CHECKED And $previousActaionResult = 1 Then
-	  $previousActaionResult = UndoAllPendingChanges()
+   Local $previousActionResult = 1
+   If GUICtrlRead($CBX_SourceControl_UndoAllPendingChanges) = $GUI_CHECKED And $previousActionResult = 1 Then
+	  $previousActionResult = UndoAllPendingChanges()
    EndIf
-   If GUICtrlRead($CBX_SourceControl_RemoveDev) = $GUI_CHECKED And $previousActaionResult = 1 Then
-	  $previousActaionResult = RemoveDev()
+   If GUICtrlRead($CBX_SourceControl_RemoveDev) = $GUI_CHECKED And $previousActionResult = 1 Then
+	  $previousActionResult = RemoveDev()
    EndIf
-   If GUICtrlRead($CBX_SourceControl_GetLatest) = $GUI_CHECKED And $previousActaionResult = 1 Then
-	  $previousActaionResult = GetLatest()
+   If GUICtrlRead($CBX_SourceControl_GetLatest) = $GUI_CHECKED And $previousActionResult = 1 Then
+	  $previousActionResult = GetLatest()
    EndIf
-   If GUICtrlRead($CBX_SourceControl_GetTheDependecies) = $GUI_CHECKED And $previousActaionResult = 1 Then
-	  $previousActaionResult = GetTheDependecies()
+   If GUICtrlRead($CBX_SourceControl_GetTheDependecies) = $GUI_CHECKED And $previousActionResult = 1 Then
+	  $previousActionResult = GetTheDependecies()
    EndIf
-   If GUICtrlRead($CBX_SourceControl_BuildIMSolution) = $GUI_CHECKED And $previousActaionResult = 1 Then
-	  $previousActaionResult = BuildIMSolution()
+   If GUICtrlRead($CBX_SourceControl_BuildIMSolution) = $GUI_CHECKED And $previousActionResult = 1 Then
+	  $previousActionResult = BuildIMSolution()
    EndIf
-   If GUICtrlRead($CBX_SourceControl_RemoveComitServices) = $GUI_CHECKED And $previousActaionResult = 1 Then
-	  $previousActaionResult = RemoveComitServices()
+   If GUICtrlRead($CBX_SourceControl_RemoveComitServices) = $GUI_CHECKED And $previousActionResult = 1 Then
+	  $previousActionResult = RemoveComitServices()
    EndIf
-   If GUICtrlRead($CBX_SourceControl_AdaptTheConfigFiles) = $GUI_CHECKED And $previousActaionResult = 1 Then
-	  $previousActaionResult = AdaptTheConfigFiles()
+   If GUICtrlRead($CBX_SourceControl_AdaptTheConfigFiles) = $GUI_CHECKED And $previousActionResult = 1 Then
+	  $previousActionResult = AdaptTheConfigFiles()
    EndIf
    EnableAllControlls()
 EndFunc
+; RunWait($cmdLine[1] & 'Environment\OracleScripts\InstallerAllTablesManual.cmd autorun local itest')
 
 Func UndoAllPendingChanges()
    SetSystemStatus("Waiting", "Waiting for your confirmation.")

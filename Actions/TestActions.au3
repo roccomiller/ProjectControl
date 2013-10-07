@@ -22,7 +22,6 @@ Func RunTest_SystemStatus()
    CreateMsgBox(64, "test", "blabal")
 EndFunc
 
-
 Func RunTest_RunWait()
    ;#requireAdmin
    $pid = RunWait("Test.bat")
@@ -32,4 +31,8 @@ Func RunTest_RunWait()
 	  Sleep(2000)
    WEnd
    MsgBox(64, "Teste", $pid)
+EndFunc
+
+Func SetTestCheckBoxState()
+	SetCheckBoxState($TestCheckBoxes, GUICtrlRead($CBX_Test_All))
 EndFunc

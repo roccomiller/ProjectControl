@@ -1,0 +1,17 @@
+[OPTIONS]
+Compatibility=1.1 or later
+Compiled file=Documentation.chm
+Contents file=TOC.hhc
+Default topic=Index.htm
+Display compile progress=No
+Index file=Index.hhk
+Language=0x809 English (United Kingdom)
+Title=C4000 Project Control
+
+
+[FILES]
+Background.jpg
+Style.css
+
+[INFOTYPES]
+

@@ -1,5 +1,18 @@
+#region Menu
+Global Const $TXT_MENU_File = "File"
+Global Const $TXT_MENU_File_OpenLog = "Open log file"
+Global Const $TXT_MENU_File_ClearLog = "Cleare log file"
+
+Global Const $TXT_MENU_Settings = "Settings"
+Global Const $TXT_MENU_About = "About"
+Global Const $TXT_MENU_Help = "Help?" & @TAB & "F1"
+#endregion Menu
+
 #region PopUps
 Global Const $TXT_POPUP_SETTINGS_Settings = "Settings"
+
+$TXT_POPUP_SETTINGS_UserPostfix = "User posfix: "
+$TXT_POPUP_SETTINGS_UserPostfix_Help = "This is the postfix used for your database schema."
 
 Global Const $TXT_POPUP_SETTINGS_UseICSimulator = "Use IC Simulator: "
 Global Const $TXT_POPUP_SETTINGS_UseICSimulator_Help = _
@@ -15,8 +28,12 @@ $Environments[0] & ": " & @TAB & "If selected, you can use all the functions (So
 
 Global Const $TXT_POPUP_SETTINGS_BasePath = "Base path: "
 Global Const $TXT_POPUP_SETTINGS_BasePath_Help = "This is the base path to your branch. Usually the parent folder of the 'Units' Folder where your Roche.c4000.sln is located."
-
+Global Const $TXT_POPUP_SETTINGS_RestartMessageTitle = "Please restart!"
+Global Const $TXT_POPUP_SETTINGS_RestartMessage = "The changes you made will take effect after you restart the app."
 Global Const $TXT_POPUP_SETTINGS_SelectBasePath = "Choose..."
+Global Const $TXT_POPUP_SETTINGS_SelectBasePath_Message = "Select the base folder of your branch."
+
+Global Const $TXT_POPUP_ABOUT_About = "About"
 #endregion PopUps
 
 #region Tabs
@@ -55,7 +72,7 @@ Global Const $TEXT_TAB_PREPARATION_CBX_CopyDatabaseExportTool = "Copy Database E
 Global Const $TEXT_TAB_PREPARATION_CBX_StartICSimulator = "Start IC Simulator"
 Global Const $TEXT_TAB_PREPARATION_CBX_StartHL7Simulator = "Start HL7 Simulator"
 Global Const $TEXT_TAB_PREPARATION_CBX_StartIMSoftware = "Start IM software"
-Global Const $TEXT_TAB_PREPARATION_CBX_CopyMasterDatafiles = "Copy MasterData files"
+Global Const $TEXT_TAB_PREPARATION_CBX_CopyMasterDatafiles = "Copy All MasterData files"
 Global Const $TEXT_TAB_PREPARATION_CBX_CheckAll = "Check all"
 Global Const $TEXT_TAB_PREPARATION_CBX_CheckAll_ToolTip = "This will check / uncheck all the checkboxes in this group."
 #endregion Preparation Tab

@@ -6,6 +6,10 @@ Global $CBX_Backup_Dummy
 Global $CBX_Backup_All
 #endregion Checkbox declaration
 
+Func SetBackupCheckBoxState()
+	SetCheckBoxState($BackupCheckBoxes, GUICtrlRead($CBX_Backup_All))
+EndFunc
+
 Func BackupAction_Click()
    If GUICtrlRead($CBX_Backup_Dummy) = $GUI_CHECKED Then
 	  RunTest_Backup()

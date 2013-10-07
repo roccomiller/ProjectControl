@@ -1,9 +1,3 @@
-#include-once
-#include <GUIConstantsEx.au3>
-
-Global $ScriptPaused
-HotKeySet("{ESC}", "Terminate")
-HotKeySet("{PAUSE}", "TogglePause")
 
 Global Const $AnimationCharacters[4] = ["[-]", "[\]", "[|]", "[/]"]
 

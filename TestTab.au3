@@ -15,6 +15,9 @@ If $includeTest Then
    $CBX_Test_All = GUICtrlCreateCheckbox($TEXT_TAB_TEST_CBX_CheckAll, $TAB_GROUP_LEFT + 5, $CBX_CHECKALL_TOP, $TAB_GROUP_WIDTH - 10, $CBX_HEIGHT)
    GUICtrlSetTip($CBX_Test_All, $TEXT_TAB_TEST_CBX_CheckAll_ToolTip)
    _ArrayAdd($CheckAllCheckBoxes, $CBX_Test_All)
+   GUICtrlSetOnEvent($CBX_Test_All, "SetTestCheckBoxState")
    Global $BTN_TestAction_Click = CreateButton($TEXT_BTN_StartAction, $BTN_ACTIONSSTART_LEFT, $BTN_ACTIONSSTART_TOP, $BTN_ACTIONSSTART_WIDTH)
    _ArrayAdd($ActionButtons, $BTN_TestAction_Click)
+   GUICtrlSetOnEvent($BTN_TestAction_Click, "TestAction_Click")
+
 EndIf
