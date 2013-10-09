@@ -1,4 +1,5 @@
 #Region ;**** Directives created by AutoIt3Wrapper_GUI ****
+;#AutoIt3Wrapper_Res_requestedExecutionLevel=RequireAdministrator
 #AutoIt3Wrapper_Res_Icon_Add=Images\Jahshaka.ico; Icon number -5
 #AutoIt3Wrapper_Res_Icon_Add=Images\Help.ico	; Icon number -6
 #AutoIt3Wrapper_Res_Icon_Add=Images\Ready.ico	; Icon number -7
@@ -32,6 +33,8 @@
 #include "Actions\PreparationActions.au3"
 #include "Actions\RoundtripsActions.au3"
 #include "Actions\BackupActions.au3"
+
+;MsgBox(0, "os version", @OSVersion)
 
 Initialize()
 Main()

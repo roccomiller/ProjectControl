@@ -88,16 +88,16 @@ EndFunc
 Func GetTheDependecies()
    SetSystemStatus("Running", "Getting the dependencies for c4000. Please wait...")
    Local $c4000Dependencies = RunWait($GetDependenciesPath & ' /DependenciesFile:Dependencies.targets /Log:GetDependencies.log', $CurrentBasePath & "Units\")
-   If $c4000Dependencies = 0 Then
-	  SetSystemStatus("Error", "There was a proble with getting the dependencies for c4000.")
-	  Return -1
-   EndIf
+   ;If $c4000Dependencies = 0 Then
+	;  SetSystemStatus("Error", "There was a proble with getting the dependencies for c4000.")
+	 ; Return -1
+   ;EndIf
    SetSystemStatus("Running", "Getting the dependencies for IC simulator. Please wait...")
    Local $simulatorDependencies = RunWait($GetDependenciesPath & ' /DependenciesFile:ICSimulator.targets /Log:GetDependenciesSimulator.log', $CurrentBasePath & "Units\")
-   If $simulatorDependencies = 0 Then
-	  SetSystemStatus("Ready", "There was a problem with getting the dependecies for IC simulator.")
-	  Return -1
-   EndIf
+   ;If $simulatorDependencies = 0 Then
+	;  SetSystemStatus("Ready", "There was a problem with getting the dependecies for IC simulator.")
+	 ; Return -1
+   ;EndIf
    SetSystemStatus("Ready", "Dependecies for c4000 and simulator successfully fetched.")
    Return 1
 EndFunc
@@ -148,16 +148,16 @@ EndFunc
 
 Func RemoveComitServices()
    SetSystemStatus("Running", "Redeploing the Comit services. Please wait...")
-   Local $cmd = $CurrentBasePath & 'Environment\IISScripts\InstallComitServices.bat ' & $CurrentBasePath & ' developer Debug local'
-   Local $cmdPit = Run($cmd)
-   While ProcessExists($cmdPit)
-	  SleepWithStatusUpdate(4000, True)
-   WEnd
-;~
-;~    Run("DeployComitServices.exe " & $CurrentBasePath)
-;~    While ProcessExists("DeployComitServices.exe")
-;~ 	  SleepWithStatusUpdate(4000, True)
-;~    WEnd
+   FileInstall("Actions\InstallComitServices.exe", "InstallComitServices.exe", 1)
+	Run("InstallComitServices.exe " & $CurrentBasePath)
+	While ProcessExists("InstallComitServices.exe")
+		Sleep(2000)
+	WEnd
+	Local $tries = 0
+	While FileExists("InstallComitServices.exe") And $tries < 10
+		FileDelete("InstallComitServices.exe")
+		$tries += 1
+	WEnd
    SetSystemStatus("Ready", "Redeploing the Comit services successfully finished.")
    Return 1
 EndFunc

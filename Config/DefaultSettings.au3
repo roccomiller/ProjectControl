@@ -28,7 +28,7 @@ Global Const $ICSimulatorProcessName = "ICSimulator.exe"
 Global $IMProcesses[9]
 $IMProcesses[0] = "Roche.C4000.ProcessManagement.ProcessManager.exe"
 $IMProcesses[1] = "Roche.C4000.UI.Server.Main.exe"
-$IMProcesses[2] = "Roche.C4000.UI.Client.UIHostProcess.exe"
+$IMProcesses[2] = "iexplore.exe" ;Roche.C4000.UI.Client.UIHostProcess.exe
 $IMProcesses[3] = "Roche.C4000.Scheduling.Scheduler.exe"
 $IMProcesses[4] = "Roche.C4000.ResourceManagement.ResourceManager.exe"
 $IMProcesses[5] = "Roche.C4000.ProcessManagement.CommonServiceHost.exe"
