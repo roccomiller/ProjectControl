@@ -64,6 +64,12 @@ Global Const $TEXT_TAB_SOURCECONTROL_CBX_RemoveComitServices = "Redeploy Comit s
 Global Const $TEXT_TAB_SOURCECONTROL_CBX_AdaptTheConfigFiles = "Adapt the config files"
 Global Const $TEXT_TAB_SOURCECONTROL_CBX_CheckAll = "Check all"
 Global Const $TEXT_TAB_SOURCECONTROL_CBX_CheckAll_ToolTip = "This will check / uncheck all the checkboxes in this group."
+
+Global Const $TEXT_TAB_SOURCECONTROL_GROUP_CheckAndTestIt = "Check and test it"
+Global Const $TEXT_TAB_SOURCECONTROL_CBX_RunFxCopAll = "Run FxCop on solution"
+Global Const $TEXT_TAB_SOURCECONTROL_CBX_RunFxCopSelective = "Run FxCop for project: "
+Global Const $TEXT_TAB_SOURCECONTROL_CBX_CheckAndTestIt_CheckAll = "Check all"
+Global Const $TEXT_TAB_SOURCECONTROL_CBX_CheckAndTestIt_CheckAll_ToolTip = "This will check / uncheck all the checkboxes in this group."
 #endregion Source Control Tab
 
 #region Preparation Tab

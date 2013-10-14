@@ -42,6 +42,7 @@ $IMProcesses[8] = "Roche.C4000.Calculator.exe"
 ;~ External tool settings
 Global Const $AppCMDPath = "%systemroot%\system32\inetsrv\appcmd.exe"
 Global Const $ExternalToolPath_Tfs = "C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\IDE\TF.exe"
+Global Const $FxCopToolPath = "C:\Program Files (x86)\Microsoft Visual Studio 11.0\Team Tools\Static Analysis Tools\FxCop\FxCopCmd.exe"
 Global Const $msBuildPath = "C:\Windows\Microsoft.NET\Framework\v4.0.30319\msbuild.exe"
 Global Const $ExternalToolPath_HL7InstallPath = "C:\Program Files (x86)\Host_Tools_76\"
 Global Const $HL7ProcessName = "hl7sim.exe"
@@ -59,6 +60,7 @@ Global Const $TAB_GROUP_WIDTH = 250
 Global Const $TAB_GROUP_HEIGHT = 300
 Global Const $TAB_GROUP_TOP = 30
 Global Const $TAB_GROUP_LEFT = 5
+Global Const $TAB_GROUP_LEFT_2 = $TAB_GROUP_LEFT + $TAB_GROUP_WIDTH + 5
 
 
 Global Const $BTN_HEIGHT = 20
@@ -66,6 +68,7 @@ Global Const $BTN_ACTIONSSTART_WIDTH = 100
 ;Global Const $BTN_ACTIONSSTART_HEIGHT = 300
 Global Const $BTN_ACTIONSSTART_TOP = $TAB_GROUP_TOP + $TAB_GROUP_HEIGHT - $BTN_HEIGHT - 5
 Global Const $BTN_ACTIONSSTART_LEFT = $TAB_GROUP_LEFT + 5
+Global Const $BTN_ACTIONSSTART_LEFT_2 = $TAB_GROUP_LEFT_2 + 5
 
 Global Const $CBX_HEIGHT = 17
 Global Const $CBX_CHECKALL_TOP = $BTN_ACTIONSSTART_TOP - $BTN_HEIGHT
@@ -77,7 +80,7 @@ Global Const $ICON_HELP_HEIGHT = 16
 #region DON'T CHANGE THIS VALUES IF YOU DON'T KNOW WHAT YOU DO!
 Global $hStatusBar, $SystemStatus, $OldSystemStatus, $ScriptPaused
 Global $ResourceFile = @ScriptFullPath
-Global $TestCheckBoxes[1], $SourceControlCheckBoxes[1], $PreparationCheckBoxes[1], $RoundtripsCheckBoxes[1], $BackupCheckBoxes[1], $CheckAllCheckBoxes[1]
+Global $TestCheckBoxes[1], $SourceControlCheckBoxes[1], $SourceControlCheckAndTestItCheckBoxes[1], $PreparationCheckBoxes[1], $RoundtripsCheckBoxes[1], $BackupCheckBoxes[1], $CheckAllCheckBoxes[1]
 Global $ActionButtons[1]
 Global $includeTest = True
 Global $includeSourcControl = True

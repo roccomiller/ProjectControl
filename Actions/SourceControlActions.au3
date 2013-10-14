@@ -9,8 +9,11 @@ Global $CBX_BuildIMSolutionDebugNoTests
 Global $CBX_SourceControl_BuildIMSolutionDebug
 Global $CBX_SourceControl_RemoveComitServices
 Global $CBX_SourceControl_AdaptTheConfigFiles
-
 Global $CBX_SourceControl_All
+
+Global $CBX_SourceControl_RunFxCopAll
+Global $CBX_SourceControl_RunFxCopSelective
+Global $CBX_SourceControl_CheckAndTestIt_All
 #endregion Checkbox declaration
 
 #region action tab helpers
@@ -29,8 +32,13 @@ EndFunc
 Func SetSourceControlCheckBoxState()
 	SetCheckBoxState($SourceControlCheckBoxes, GUICtrlRead($CBX_SourceControl_All))
 EndFunc
+
+Func SetSourceControlCheckAndTestItCheckBoxState()
+	SetCheckBoxState($SourceControlCheckAndTestItCheckBoxes, GUICtrlRead($CBX_SourceControl_CheckAndTestIt_All))
+EndFunc
 #endregion action tab helpers
 
+#region Group source control
 Func SourceControlAction_Click()
 	DisableAllControlls()
 	Local $previousActionResult = 1
@@ -93,14 +101,14 @@ Func RemoveDev()
 EndFunc
 
 Func GetLatest()
-   SetSystemStatus("Running", "Getting the latest source version from TFS repository.")
-   Local $cmd = $ExternalToolPath_Tfs & " get /recursive /force /overwrite /version:T"
-   If RunWait($cmd, $CurrentBasePath) = 0 Then
-	  SetSystemStatus("Error", "There was a problem getting the latest code from tfs.")
-	  Return -1
-   EndIf
-   SetSystemStatus("Ready", "Latest source is now on your system.")
-   Return 1
+	SetSystemStatus("Running", "Getting the latest source version from TFS repository.")
+	Local $cmd = $ExternalToolPath_Tfs & " get /recursive /force /overwrite /version:T"
+	If RunWait($cmd, $CurrentBasePath) = 0 Then
+		SetSystemStatus("Error", "There was a problem getting the latest code from tfs.")
+		Return -1
+	EndIf
+	SetSystemStatus("Ready", "Latest source is now on your system.")
+	Return 1
 EndFunc
 
 Func GetTheDependecies()
@@ -121,36 +129,40 @@ Func GetTheDependecies()
 EndFunc
 
 Func BuildIMSolution($buildConfiguration = "Debug")
-   SetSystemStatus("Running", "Building the c4000 solution. Please wait...")
-   ;~ Kill all running c4000 processes but ask first if one is running
-   Local $c4000IsRunning = False
-   For $i = 0 To UBound($IMProcesses) - 1
-	  If ProcessExists($IMProcesses[$i]) Then
-		 $c4000IsRunning = True
-		 ExitLoop
-	  EndIf
-   Next
-   If ProcessExists($HL7ProcessName) Then
-	  $c4000IsRunning = True
-   EndIf
-   If ProcessExists($ICSimulatorProcessName) Then
-	  $c4000IsRunning = True
-   EndIf
-   ;~ 3 => Yes, No, Cancel | Yes = 6, No = 7 and Cancel = 2
-   If $c4000IsRunning Then
-	  SetSystemStatus("Waiting", "Waiting for your confirmation.")
-	  $killProcessesFirst = MsgBox(3, "C4000 already running", "It seems that at least one c4000 process is running. Do you want to stop all c4000 processes?")
-	  If $killProcessesFirst = 6 Then
-		 KillAllProcesses()
-		 StartBildIMSolution($buildConfiguration)
-	  ElseIf $killProcessesFirst = 7 Then
-		 StartBildIMSolution($buildConfiguration)
-	  EndIf
-   Else
-	  StartBildIMSolution($buildConfiguration)
-   EndIf
-   SetSystemStatus("Ready", "C4000 solution successfully buildet.")
-   Return 1
+	SetSystemStatus("Running", "Building the c4000 solution. Please wait...")
+	;~ Kill all running c4000 processes but ask first if one is running
+	Local $c4000IsRunning = False
+	For $i = 0 To UBound($IMProcesses) - 1
+		If Not ($IMProcesses[$i] = $IMProcesses[2]) And ProcessExists($IMProcesses[$i]) Then
+			$c4000IsRunning = True
+		ExitLoop
+		EndIf
+	Next
+	Local $uiHandle = WinGetHandle("cobas4000")
+	If Not ($uiHandle = "") And @error = 1 Then
+		$c4000IsRunning = True
+	EndIf
+	If ProcessExists($HL7ProcessName) Then
+		$c4000IsRunning = True
+	EndIf
+	If ProcessExists($ICSimulatorProcessName) Then
+		$c4000IsRunning = True
+	EndIf
+	;~ 3 => Yes, No, Cancel | Yes = 6, No = 7 and Cancel = 2
+	If $c4000IsRunning Then
+		SetSystemStatus("Waiting", "Waiting for your confirmation.")
+		$killProcessesFirst = MsgBox(3, "C4000 already running", "It seems that at least one c4000 process is running. Do you want to stop all c4000 processes?")
+		If $killProcessesFirst = 6 Then
+			KillAllProcesses()
+			StartBildIMSolution($buildConfiguration)
+		ElseIf $killProcessesFirst = 7 Then
+			StartBildIMSolution($buildConfiguration)
+		EndIf
+	Else
+		StartBildIMSolution($buildConfiguration)
+	EndIf
+	SetSystemStatus("Ready", "C4000 solution successfully buildet.")
+	Return 1
 EndFunc
 
 Func StartBildIMSolution($buildConfiguration)
@@ -164,20 +176,9 @@ Func StartBildIMSolution($buildConfiguration)
 	Return 1
 EndFunc
 
-;~ Func BuildIMSolutionDebugNoTests()
-;~ 	SetSystemStatus("Running", "Building the c4000 solution. Please wait...")
-;~ 	Local $cmd = $msBuildPath & " " & $CurrentBasePath & "Units\Roche.c4000.sln /t:build /p:Configuration=DebugNoTests;RunCodeAnalysis=false;WarningLevel=0 /nr:false"
-;~ 	Local $res = RunWait($cmd)
-;~ 	If @error Then
-;~ 		MsgBox(16, "Build IM solution in DebugNoTests exited with error.", "The error code is: " & @error)
-;~ 		Return -1
-;~ 	EndIf
-;~ 	Return 1
-;~ EndFunc
-
 Func RemoveComitServices()
-   SetSystemStatus("Running", "Redeploing the Comit services. Please wait...")
-   FileInstall("Actions\InstallComitServices.exe", "InstallComitServices.exe", 1)
+	SetSystemStatus("Running", "Redeploing the Comit services. Please wait...")
+	FileInstall("Actions\InstallComitServices.exe", "InstallComitServices.exe", 1)
 	Run("InstallComitServices.exe " & $CurrentBasePath)
 	While ProcessExists("InstallComitServices.exe")
 		Sleep(2000)
@@ -187,8 +188,8 @@ Func RemoveComitServices()
 		FileDelete("InstallComitServices.exe")
 		$tries += 1
 	WEnd
-   SetSystemStatus("Ready", "Redeploing the Comit services successfully finished.")
-   Return 1
+	SetSystemStatus("Ready", "Redeploing the Comit services successfully finished.")
+	Return 1
 EndFunc
 
 Func AdaptTheConfigFiles()
@@ -223,3 +224,38 @@ Func AdaptTheConfigFiles()
    SetSystemStatus("Ready", "Adapting the instrumentSettings.xml and the app.config of process manager successfully finished.")
    Return 1
 EndFunc
+#endregion Group source control
+
+#region Group source control check and test it
+Func SourceControlAction_CheckAndTestIt_Click()
+	DisableAllControlls()
+	Local $previousActionResult = 1
+	If GUICtrlRead($CBX_SourceControl_RunFxCopAll) = $GUI_CHECKED And $previousActionResult = 1 Then
+		$previousActionResult = RunFxCopAll()
+	EndIf
+	If GUICtrlRead($CBX_SourceControl_RunFxCopSelective) = $GUI_CHECKED And $previousActionResult = 1 Then
+		$previousActionResult = RunFxCopSelective()
+	EndIf
+	EnableAllControlls()
+EndFunc
+
+Func RunFxCopAll()
+	If FileExists("Violations.xml") Then
+		FileDelete("Violations.xml")
+	EndIf
+	Local $cmd = $FxCopToolPath
+	$cmd &= ' /out:"Violations.xml"'
+	$cmd &= ' /console'
+	$cmd &= ' /summary'
+	$cmd &= ' /file:"' & $CurrentBasePath & 'Units\bin\Debug\Roche.C4000.*.dll"'
+	$cmd &= ' /dictionary:"' & $CurrentBasePath & 'Units\CodeAnalysisDictionary.xml"'
+	$cmd &= ' /ruleset:="' & $CurrentBasePath & 'Units\RocheCodingStandardsNoNaming.Rules.ruleset"'
+	RunWait($cmd)
+	Return 1
+EndFunc
+
+Func RunFxCopSelective()
+
+EndFunc
+
+#endregion Group source control check and test it
