@@ -47,6 +47,7 @@ Func LoadSettings()
 	  CreateSettings()
    EndIf
    _XMLFileOpen($SettingsFileName)
+   Global $CurrentDatabaseLocation = _XMLGetAttrib("/c4000AutoItSettings/DatabaseLocation", "Location")
    Global $CurrentUserPostfix = _XMLGetAttrib("/c4000AutoItSettings/UserPosfix", "Postfix")
    Global $CurrentUseICSimulator = _XMLGetAttrib("/c4000AutoItSettings/UseICSimulator", "Use")
    Global $CurrentBasePath = _XMLGetAttrib("/c4000AutoItSettings/BasePath", "Path")
@@ -54,28 +55,30 @@ Func LoadSettings()
 EndFunc
 
 Func SaveSettings()
-   If NOT FileExists($SettingsFileName) Then
-	  CreateSettings()
-   EndIf
-   _XMLFileOpen($SettingsFileName)
-   _XMLSetAttrib("/c4000AutoItSettings/UserPosfix", "Postfix" , $CurrentUserPostfix)
-   _XMLSetAttrib("/c4000AutoItSettings/UseICSimulator", "Use", $CurrentUseICSimulator)
-   _XMLSetAttrib("/c4000AutoItSettings/BasePath", "Path", $CurrentBasePath)
-   _XMLSetAttrib("/c4000AutoItSettings/Environment", "System", $CurrentEnvironment)
+	If NOT FileExists($SettingsFileName) Then
+		CreateSettings()
+	EndIf
+	_XMLFileOpen($SettingsFileName)
+	_XMLSetAttrib("/c4000AutoItSettings/DatabaseLocation", "Location", $CurrentDatabaseLocation)
+	_XMLSetAttrib("/c4000AutoItSettings/UserPosfix", "Postfix" , $CurrentUserPostfix)
+	_XMLSetAttrib("/c4000AutoItSettings/UseICSimulator", "Use", $CurrentUseICSimulator)
+	_XMLSetAttrib("/c4000AutoItSettings/BasePath", "Path", $CurrentBasePath)
+	_XMLSetAttrib("/c4000AutoItSettings/Environment", "System", $CurrentEnvironment)
 EndFunc
 
 Func CreateSettings()
-   _XMLCreateFile($SettingsFileName, "c4000AutoItSettings", True)
-   _XMLFileOpen($SettingsFileName)
-   _XMLCreateChildNodeWAttr("//c4000AutoItSettings", "UserPosfix", "Postfix", $CurrentUserPostfix)
-   _XMLCreateChildNodeWAttr("//c4000AutoItSettings", "UseICSimulator", "Use", $CurrentUseICSimulator)
-   _XMLCreateChildNodeWAttr("//c4000AutoItSettings", "Environment", "System", $CurrentEnvironment)
-   _XMLCreateChildNodeWAttr("//c4000AutoItSettings", "BasePath", "Path", $CurrentBasePath)
-   _XMLCreateChildNode("//c4000AutoItSettings", "IMProcesses")
-   For $i = 0 To UBound($IMProcesses) - 1
-	  _XMLCreateChildNodeWAttr("//c4000AutoItSettings/IMProcesses", "IMProcess", "Name", $IMProcesses[$i])
-   Next
-   WriteLog("settings created: " & $SettingsFileName)
+	_XMLCreateFile($SettingsFileName, "c4000AutoItSettings", True)
+	_XMLFileOpen($SettingsFileName)
+	_XMLCreateChildNodeWAttr("/c4000AutoItSettings", "DatabaseLocation", "Location", $CurrentDatabaseLocation)
+	_XMLCreateChildNodeWAttr("/c4000AutoItSettings", "UserPosfix", "Postfix", $CurrentUserPostfix)
+	_XMLCreateChildNodeWAttr("/c4000AutoItSettings", "UseICSimulator", "Use", $CurrentUseICSimulator)
+	_XMLCreateChildNodeWAttr("/c4000AutoItSettings", "Environment", "System", $CurrentEnvironment)
+	_XMLCreateChildNodeWAttr("/c4000AutoItSettings", "BasePath", "Path", $CurrentBasePath)
+	_XMLCreateChildNode("/c4000AutoItSettings", "IMProcesses")
+	For $i = 0 To UBound($IMProcesses) - 1
+		_XMLCreateChildNodeWAttr("/c4000AutoItSettings/IMProcesses", "IMProcess", "Name", $IMProcesses[$i])
+	Next
+	WriteLog("settings created: " & $SettingsFileName)
 EndFunc
 
 Func LoadDefaultSettings()
@@ -85,14 +88,17 @@ Func LoadDefaultSettings()
 EndFunc
 
 Func KillAllProcesses()
-   SetSystemStatus("Running", "Killing all running c4000 related processes. Please wait...")
-   For $i = 0 To UBound($IMProcesses) - 1
-	  ProcessClose($IMProcesses[$i])
-   Next
-   ProcessClose($HL7ProcessName)
-   ProcessClose($ICSimulatorProcessName)
-   SetSystemStatus("Ready", "All c4000 related processes killed.")
-   Return 1
+	SetSystemStatus("Running", "Killing all running c4000 related processes. Please wait...")
+	WinClose("cobas4000")
+	For $i = 0 To UBound($IMProcesses) - 1
+		If Not ($IMProcesses[$i] = $IMProcesses[2]) Then ;iexplorer.exe
+			ProcessClose($IMProcesses[$i])
+		EndIf
+	Next
+	ProcessClose($HL7ProcessName)
+	ProcessClose($ICSimulatorProcessName)
+	SetSystemStatus("Ready", "All c4000 related processes killed.")
+	Return 1
 EndFunc
 
 Func WriteLog($logMessage, $severity = "Debug")

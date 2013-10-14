@@ -9,24 +9,32 @@ If $includePreparation Then
 	$CBX_Preparation_RemoveOldLogfiles = GUICtrlCreateCheckbox($TEXT_TAB_PREPARATION_CBX_RemoveOldLogfiles, $TAB_GROUP_LEFT + 5, $TAB_GROUP_TOP + ($CBX_HEIGHT * 2), $TAB_GROUP_WIDTH - 10, $CBX_HEIGHT)
 	_ArrayAdd($PreparationCheckBoxes, $CBX_Preparation_RemoveOldLogfiles)
 
-	$CBX_Preparation_CleanDatabas = GUICtrlCreateCheckbox($TEXT_TAB_PREPARATION_CBX_CleanDatabase, $TAB_GROUP_LEFT + 5, $TAB_GROUP_TOP + ($CBX_HEIGHT * 3), $TAB_GROUP_WIDTH - 10, $CBX_HEIGHT)
-	_ArrayAdd($PreparationCheckBoxes, $CBX_Preparation_CleanDatabas)
+	$CBX_Preparation_CleanDatabase = GUICtrlCreateCheckbox($TEXT_TAB_PREPARATION_CBX_CleanDatabase, $TAB_GROUP_LEFT + 5, $TAB_GROUP_TOP + ($CBX_HEIGHT * 3), $TAB_GROUP_WIDTH - 10, $CBX_HEIGHT)
+	_ArrayAdd($PreparationCheckBoxes, $CBX_Preparation_CleanDatabase)
 
 	$CBX_Preparation_CopyDatabaseExportTool = GUICtrlCreateCheckbox($TEXT_TAB_PREPARATION_CBX_CopyDatabaseExportTool, $TAB_GROUP_LEFT + 5, $TAB_GROUP_TOP + ($CBX_HEIGHT * 4), $TAB_GROUP_WIDTH - 10, $CBX_HEIGHT)
 	_ArrayAdd($PreparationCheckBoxes, $CBX_Preparation_CopyDatabaseExportTool)
 
+	$CBX_Preparation_ChangeToRSAMode = GUICtrlCreateCheckbox($TEXT_TAB_PREPARATION_CBX_ChangeToRSAMode, $TAB_GROUP_LEFT + 5, $TAB_GROUP_TOP + ($CBX_HEIGHT * 5), $TAB_GROUP_WIDTH - 10, $CBX_HEIGHT)
+	_ArrayAdd($PreparationCheckBoxes, $CBX_Preparation_ChangeToRSAMode); do not iclude this and the next checkbx -> does not make sense...
+	GUICtrlSetOnEvent($CBX_Preparation_ChangeToRSAMode, "SetChangeToRSACheckBox")
+
+	$CBX_Preparation_ChangeToTsnDropMode = GUICtrlCreateCheckbox($TEXT_TAB_PREPARATION_CBX_ChangeToTsnDropMode, $TAB_GROUP_LEFT + 5, $TAB_GROUP_TOP + ($CBX_HEIGHT * 6), $TAB_GROUP_WIDTH - 10, $CBX_HEIGHT)
+	_ArrayAdd($PreparationCheckBoxes, $CBX_Preparation_ChangeToTsnDropMode)
+	GUICtrlSetOnEvent($CBX_Preparation_ChangeToTsnDropMode, "SetChangeToTsnDropCheckBox")
+
 	If Not ($CurrentUseICSimulator = $UseICSimulator[2]) Then
-		$CBX_Preparation_StartICSimulator = GUICtrlCreateCheckbox($TEXT_TAB_PREPARATION_CBX_StartICSimulator, $TAB_GROUP_LEFT + 5, $TAB_GROUP_TOP + ($CBX_HEIGHT * 5), $TAB_GROUP_WIDTH - 10, $CBX_HEIGHT)
+		$CBX_Preparation_StartICSimulator = GUICtrlCreateCheckbox($TEXT_TAB_PREPARATION_CBX_StartICSimulator, $TAB_GROUP_LEFT + 5, $TAB_GROUP_TOP + ($CBX_HEIGHT * 7), $TAB_GROUP_WIDTH - 10, $CBX_HEIGHT)
 		_ArrayAdd($PreparationCheckBoxes, $CBX_Preparation_StartICSimulator)
 	EndIf
 
-	$CBX_Preparation_StartHL7Simulator = GUICtrlCreateCheckbox($TEXT_TAB_PREPARATION_CBX_StartHL7Simulator, $TAB_GROUP_LEFT + 5, $TAB_GROUP_TOP + ($CBX_HEIGHT * 6), $TAB_GROUP_WIDTH - 10, $CBX_HEIGHT)
+	$CBX_Preparation_StartHL7Simulator = GUICtrlCreateCheckbox($TEXT_TAB_PREPARATION_CBX_StartHL7Simulator, $TAB_GROUP_LEFT + 5, $TAB_GROUP_TOP + ($CBX_HEIGHT * 8), $TAB_GROUP_WIDTH - 10, $CBX_HEIGHT)
 	_ArrayAdd($PreparationCheckBoxes, $CBX_Preparation_StartHL7Simulator)
 
-	$CBX_Preparation_StartIMSoftware = GUICtrlCreateCheckbox($TEXT_TAB_PREPARATION_CBX_StartIMSoftware, $TAB_GROUP_LEFT + 5, $TAB_GROUP_TOP + ($CBX_HEIGHT * 7), $TAB_GROUP_WIDTH - 10, $CBX_HEIGHT)
+	$CBX_Preparation_StartIMSoftware = GUICtrlCreateCheckbox($TEXT_TAB_PREPARATION_CBX_StartIMSoftware, $TAB_GROUP_LEFT + 5, $TAB_GROUP_TOP + ($CBX_HEIGHT * 9), $TAB_GROUP_WIDTH - 10, $CBX_HEIGHT)
 	_ArrayAdd($PreparationCheckBoxes, $CBX_Preparation_StartIMSoftware)
 
-	$CBX_Preparation_CopyAllMasterDatafiles = GUICtrlCreateCheckbox($TEXT_TAB_PREPARATION_CBX_CopyMasterDatafiles, $TAB_GROUP_LEFT + 5, $TAB_GROUP_TOP + ($CBX_HEIGHT * 8), $TAB_GROUP_WIDTH - 10, $CBX_HEIGHT)
+	$CBX_Preparation_CopyAllMasterDatafiles = GUICtrlCreateCheckbox($TEXT_TAB_PREPARATION_CBX_CopyMasterDatafiles, $TAB_GROUP_LEFT + 5, $TAB_GROUP_TOP + ($CBX_HEIGHT * 10), $TAB_GROUP_WIDTH - 10, $CBX_HEIGHT)
 	_ArrayAdd($PreparationCheckBoxes, $CBX_Preparation_CopyAllMasterDatafiles)
 
 	;~ Check all and start actions

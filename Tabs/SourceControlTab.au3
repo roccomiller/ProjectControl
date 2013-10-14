@@ -15,13 +15,18 @@ If $includeSourcControl Then
    $CBX_SourceControl_GetTheDependecies = GUICtrlCreateCheckbox($TEXT_TAB_SOURCECONTROL_CBX_GetTheDependecies, $TAB_GROUP_LEFT + 5, $TAB_GROUP_TOP + ($CBX_HEIGHT * 4), $TAB_GROUP_WIDTH - 10, $CBX_HEIGHT)
    _ArrayAdd($SourceControlCheckBoxes, $CBX_SourceControl_GetTheDependecies)
 
-   $CBX_SourceControl_BuildIMSolution = GUICtrlCreateCheckbox($TEXT_TAB_SOURCECONTROL_CBX_BuildIMSolution, $TAB_GROUP_LEFT + 5, $TAB_GROUP_TOP + ($CBX_HEIGHT * 5), $TAB_GROUP_WIDTH - 10, $CBX_HEIGHT)
-   _ArrayAdd($SourceControlCheckBoxes, $CBX_SourceControl_BuildIMSolution)
+   $CBX_SourceControl_BuildIMSolutionDebugNoTest = GUICtrlCreateCheckbox($TEXT_TAB_SOURCECONTROL_CBX_BuildIMSolutionDebugNoTests, $TAB_GROUP_LEFT + 5, $TAB_GROUP_TOP + ($CBX_HEIGHT * 5), $TAB_GROUP_WIDTH - 10, $CBX_HEIGHT)
+   _ArrayAdd($SourceControlCheckBoxes, $CBX_SourceControl_BuildIMSolutionDebugNoTest)
+   GUICtrlSetOnEvent($CBX_SourceControl_BuildIMSolutionDebugNoTest, "SetBuildIMSolutionDebugNoTestCheckBox")
 
-   $CBX_SourceControl_RemoveComitServices = GUICtrlCreateCheckbox($TEXT_TAB_SOURCECONTROL_CBX_RemoveComitServices, $TAB_GROUP_LEFT + 5, $TAB_GROUP_TOP + ($CBX_HEIGHT * 6), $TAB_GROUP_WIDTH - 10, $CBX_HEIGHT)
+   $CBX_SourceControl_BuildIMSolutionDebug = GUICtrlCreateCheckbox($TEXT_TAB_SOURCECONTROL_CBX_BuildIMSolutionDebug, $TAB_GROUP_LEFT + 5, $TAB_GROUP_TOP + ($CBX_HEIGHT * 6), $TAB_GROUP_WIDTH - 10, $CBX_HEIGHT)
+   _ArrayAdd($SourceControlCheckBoxes, $CBX_SourceControl_BuildIMSolutionDebug)
+   GUICtrlSetOnEvent($CBX_SourceControl_BuildIMSolutionDebug, "SetBuildIMSolutionDebugCheckBox")
+
+   $CBX_SourceControl_RemoveComitServices = GUICtrlCreateCheckbox($TEXT_TAB_SOURCECONTROL_CBX_RemoveComitServices, $TAB_GROUP_LEFT + 5, $TAB_GROUP_TOP + ($CBX_HEIGHT * 7), $TAB_GROUP_WIDTH - 10, $CBX_HEIGHT)
    _ArrayAdd($SourceControlCheckBoxes, $CBX_SourceControl_RemoveComitServices)
 
-   $CBX_SourceControl_AdaptTheConfigFiles = GUICtrlCreateCheckbox($TEXT_TAB_SOURCECONTROL_CBX_AdaptTheConfigFiles, $TAB_GROUP_LEFT + 5, $TAB_GROUP_TOP + ($CBX_HEIGHT * 7), $TAB_GROUP_WIDTH - 10, $CBX_HEIGHT)
+   $CBX_SourceControl_AdaptTheConfigFiles = GUICtrlCreateCheckbox($TEXT_TAB_SOURCECONTROL_CBX_AdaptTheConfigFiles, $TAB_GROUP_LEFT + 5, $TAB_GROUP_TOP + ($CBX_HEIGHT * 8), $TAB_GROUP_WIDTH - 10, $CBX_HEIGHT)
    _ArrayAdd($SourceControlCheckBoxes, $CBX_SourceControl_AdaptTheConfigFiles)
 
    ;~ Check all and start actions

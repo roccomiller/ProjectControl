@@ -5,42 +5,60 @@ Global $CBX_SourceControl_UndoAllPendingChanges
 Global $CBX_SourceControl_RemoveDev
 Global $CBX_SourceControl_GetLatest
 Global $CBX_SourceControl_GetTheDependecies
-Global $CBX_SourceControl_BuildIMSolution
+Global $CBX_BuildIMSolutionDebugNoTests
+Global $CBX_SourceControl_BuildIMSolutionDebug
 Global $CBX_SourceControl_RemoveComitServices
 Global $CBX_SourceControl_AdaptTheConfigFiles
 
 Global $CBX_SourceControl_All
 #endregion Checkbox declaration
 
+#region action tab helpers
+Func SetBuildIMSolutionDebugNoTestCheckBox()
+	If GUICtrlRead($TEXT_TAB_SOURCECONTROL_CBX_BuildIMSolutionDebugNoTests) = $GUI_CHECKED Then
+		GUICtrlSetState($CBX_SourceControl_BuildIMSolutionDebug, $GUI_UNCHECKED)
+	EndIf
+EndFunc
+
+Func SetBuildIMSolutionDebugCheckBox()
+	If GUICtrlRead($CBX_SourceControl_BuildIMSolutionDebug) = $GUI_CHECKED Then
+		GUICtrlSetState($TEXT_TAB_SOURCECONTROL_CBX_BuildIMSolutionDebugNoTests, $GUI_UNCHECKED)
+	EndIf
+EndFunc
+
 Func SetSourceControlCheckBoxState()
 	SetCheckBoxState($SourceControlCheckBoxes, GUICtrlRead($CBX_SourceControl_All))
 EndFunc
+#endregion action tab helpers
 
 Func SourceControlAction_Click()
-   DisableAllControlls()
-   Local $previousActionResult = 1
-   If GUICtrlRead($CBX_SourceControl_UndoAllPendingChanges) = $GUI_CHECKED And $previousActionResult = 1 Then
-	  $previousActionResult = UndoAllPendingChanges()
-   EndIf
-   If GUICtrlRead($CBX_SourceControl_RemoveDev) = $GUI_CHECKED And $previousActionResult = 1 Then
-	  $previousActionResult = RemoveDev()
-   EndIf
-   If GUICtrlRead($CBX_SourceControl_GetLatest) = $GUI_CHECKED And $previousActionResult = 1 Then
-	  $previousActionResult = GetLatest()
-   EndIf
-   If GUICtrlRead($CBX_SourceControl_GetTheDependecies) = $GUI_CHECKED And $previousActionResult = 1 Then
-	  $previousActionResult = GetTheDependecies()
-   EndIf
-   If GUICtrlRead($CBX_SourceControl_BuildIMSolution) = $GUI_CHECKED And $previousActionResult = 1 Then
-	  $previousActionResult = BuildIMSolution()
-   EndIf
-   If GUICtrlRead($CBX_SourceControl_RemoveComitServices) = $GUI_CHECKED And $previousActionResult = 1 Then
-	  $previousActionResult = RemoveComitServices()
-   EndIf
-   If GUICtrlRead($CBX_SourceControl_AdaptTheConfigFiles) = $GUI_CHECKED And $previousActionResult = 1 Then
-	  $previousActionResult = AdaptTheConfigFiles()
-   EndIf
-   EnableAllControlls()
+	DisableAllControlls()
+	Local $previousActionResult = 1
+	If GUICtrlRead($CBX_SourceControl_UndoAllPendingChanges) = $GUI_CHECKED And $previousActionResult = 1 Then
+		$previousActionResult = UndoAllPendingChanges()
+	EndIf
+	If GUICtrlRead($CBX_SourceControl_RemoveDev) = $GUI_CHECKED And $previousActionResult = 1 Then
+		$previousActionResult = RemoveDev()
+	EndIf
+	If GUICtrlRead($CBX_SourceControl_GetLatest) = $GUI_CHECKED And $previousActionResult = 1 Then
+		$previousActionResult = GetLatest()
+	EndIf
+	If GUICtrlRead($CBX_SourceControl_GetTheDependecies) = $GUI_CHECKED And $previousActionResult = 1 Then
+		$previousActionResult = GetTheDependecies()
+	EndIf
+	If GUICtrlRead($TEXT_TAB_SOURCECONTROL_CBX_BuildIMSolutionDebugNoTests) = $GUI_CHECKED And $previousActionResult = 1 Then
+		$previousActionResult = BuildIMSolution("DebugNoTests")
+	EndIf
+	If GUICtrlRead($CBX_SourceControl_BuildIMSolutionDebug) = $GUI_CHECKED And $previousActionResult = 1 Then
+		$previousActionResult = BuildIMSolution("Debug")
+	EndIf
+	If GUICtrlRead($CBX_SourceControl_RemoveComitServices) = $GUI_CHECKED And $previousActionResult = 1 Then
+		$previousActionResult = RemoveComitServices()
+	EndIf
+	If GUICtrlRead($CBX_SourceControl_AdaptTheConfigFiles) = $GUI_CHECKED And $previousActionResult = 1 Then
+		$previousActionResult = AdaptTheConfigFiles()
+	EndIf
+	EnableAllControlls()
 EndFunc
 ; RunWait($cmdLine[1] & 'Environment\OracleScripts\InstallerAllTablesManual.cmd autorun local itest')
 
@@ -102,7 +120,7 @@ Func GetTheDependecies()
    Return 1
 EndFunc
 
-Func BuildIMSolution()
+Func BuildIMSolution($buildConfiguration = "Debug")
    SetSystemStatus("Running", "Building the c4000 solution. Please wait...")
    ;~ Kill all running c4000 processes but ask first if one is running
    Local $c4000IsRunning = False
@@ -124,27 +142,38 @@ Func BuildIMSolution()
 	  $killProcessesFirst = MsgBox(3, "C4000 already running", "It seems that at least one c4000 process is running. Do you want to stop all c4000 processes?")
 	  If $killProcessesFirst = 6 Then
 		 KillAllProcesses()
-		 BuildIMSolutionDebugNoTests()
+		 StartBildIMSolution($buildConfiguration)
 	  ElseIf $killProcessesFirst = 7 Then
-		 BuildIMSolutionDebugNoTests()
+		 StartBildIMSolution($buildConfiguration)
 	  EndIf
    Else
-	  BuildIMSolutionDebugNoTests()
+	  StartBildIMSolution($buildConfiguration)
    EndIf
    SetSystemStatus("Ready", "C4000 solution successfully buildet.")
    Return 1
 EndFunc
 
-Func BuildIMSolutionDebugNoTests()
-   SetSystemStatus("Running", "Building the c4000 solution. Please wait...")
-   Local $cmd = $msBuildPath & " " & $CurrentBasePath & "Units\Roche.c4000.sln /t:build /p:Configuration=DebugNoTests;RunCodeAnalysis=false;WarningLevel=0 /nr:false"
-   Local $res = RunWait($cmd)
-   If @error Then
-	  MsgBox(16, "Build IM solution in DebugNoTests exited with error.", "The error code is: " & @error)
-	  Return -1
-   EndIf
-   Return 1
+Func StartBildIMSolution($buildConfiguration)
+	SetSystemStatus("Running", "Building the c4000 solution with configuration '" & $buildConfiguration & "'. Please wait...")
+	Local $cmd = $msBuildPath & " " & $CurrentBasePath & "Units\Roche.c4000.sln /t:build /p:Configuration=" & $buildConfiguration & ";RunCodeAnalysis=false;WarningLevel=0 /nr:false"
+	Local $res = RunWait($cmd)
+	If @error Then
+		MsgBox(16, "Build IM solution with configuration '" & $buildConfiguration & "' exited with error.", "The error code is: " & @error)
+		Return -1
+	EndIf
+	Return 1
 EndFunc
+
+;~ Func BuildIMSolutionDebugNoTests()
+;~ 	SetSystemStatus("Running", "Building the c4000 solution. Please wait...")
+;~ 	Local $cmd = $msBuildPath & " " & $CurrentBasePath & "Units\Roche.c4000.sln /t:build /p:Configuration=DebugNoTests;RunCodeAnalysis=false;WarningLevel=0 /nr:false"
+;~ 	Local $res = RunWait($cmd)
+;~ 	If @error Then
+;~ 		MsgBox(16, "Build IM solution in DebugNoTests exited with error.", "The error code is: " & @error)
+;~ 		Return -1
+;~ 	EndIf
+;~ 	Return 1
+;~ EndFunc
 
 Func RemoveComitServices()
    SetSystemStatus("Running", "Redeploing the Comit services. Please wait...")
@@ -166,9 +195,11 @@ Func AdaptTheConfigFiles()
    SetSystemStatus("Running", "Adapting the instrumentSettings.xml and the app.config of process manager. Please wait...")
    Local $file = $CurrentBasePath & "Units\bin\Debug\Roche.C4000.ProcessManagement.ProcessManager.exe.config"
    _ReplaceStringInFile($file, ", CreateHidden", "")
+   _ReplaceStringInFile($file, "-k Roche.C4000.UI.Client.SL.Main.html", "Roche.C4000.UI.Client.SL.Main.html")
 
    $file = $CurrentBasePath & "Units\ProcessManagement\Source\Roche.C4000.ProcessManagement.ProcessManager\app.config"
    _ReplaceStringInFile($file, ", CreateHidden", "")
+   _ReplaceStringInFile($file, "-k Roche.C4000.UI.Client.SL.Main.html", "Roche.C4000.UI.Client.SL.Main.html")
 
    $file = $CurrentBasePath & "Units\InstrumentAccess\Source\Roche.C4000.InstrumentAccess.ServiceHost\InstrumentSettings.xml"
    ; Remove the comments from the simulator part
@@ -191,15 +222,4 @@ Func AdaptTheConfigFiles()
    _ReplaceStringInFile($file, '<!--<!--', '<!--')
    SetSystemStatus("Ready", "Adapting the instrumentSettings.xml and the app.config of process manager successfully finished.")
    Return 1
-EndFunc
-
-Func RunTest_SourceControl2()
-   ;#requireAdmin
-   $pid = RunWait("Test.bat")
-   MsgBox(64, "Teste", $pid)
-   $pid = Run("Test.bat")
-   While ProcessExists($pid)
-	  Sleep(2000)
-   WEnd
-   MsgBox(64, "Teste", $pid)
 EndFunc

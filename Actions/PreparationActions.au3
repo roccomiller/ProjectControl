@@ -3,8 +3,10 @@
 #region Checkbox declaration
 Global $CBX_Preparation_RemoveOldMasterData
 Global $CBX_Preparation_RemoveOldLogfiles
-Global $CBX_Preparation_CleanDatabas
+Global $CBX_Preparation_CleanDatabase
 Global $CBX_Preparation_CopyDatabaseExportTool
+Global $CBX_Preparation_ChangeToRSAMode
+Global $CBX_Preparation_ChangeToTsnDropMode
 Global $CBX_Preparation_StartICSimulator
 Global $CBX_Preparation_StartHL7Simulator
 Global $CBX_Preparation_StartIMSoftware
@@ -14,9 +16,23 @@ Global $CBX_Preparation_All
 _ArrayAdd($CheckAllCheckBoxes, $CBX_Preparation_All)
 #endregion Checkbox declaration
 
+#region action tab helpers
+Func SetChangeToRSACheckBox()
+	If GUICtrlRead($CBX_Preparation_ChangeToRSAMode) = $GUI_CHECKED Then
+		GUICtrlSetState($CBX_Preparation_ChangeToTsnDropMode, $GUI_UNCHECKED)
+	EndIf
+EndFunc
+
+Func SetChangeToTsnDropCheckBox()
+	If GUICtrlRead($CBX_Preparation_ChangeToTsnDropMode) = $GUI_CHECKED Then
+		GUICtrlSetState($CBX_Preparation_ChangeToRSAMode, $GUI_UNCHECKED)
+	EndIf
+EndFunc
+
 Func SetPreparationCheckBoxState()
 	SetCheckBoxState($PreparationCheckBoxes, GUICtrlRead($CBX_Preparation_All))
 EndFunc
+#endregion action tab helpers
 
 Func PreparationAction_Click()
 	DisableAllControlls()
@@ -27,11 +43,17 @@ Func PreparationAction_Click()
 	If GUICtrlRead($CBX_Preparation_RemoveOldLogfiles) = $GUI_CHECKED And $previousActionResult = 1 Then
 		$previousActionResult = RemoveOldLogfiles()
 	EndIf
-	If GUICtrlRead($CBX_Preparation_CleanDatabas) = $GUI_CHECKED And $previousActionResult = 1 Then
+	If GUICtrlRead($CBX_Preparation_CleanDatabase) = $GUI_CHECKED And $previousActionResult = 1 Then
 		$previousActionResult = CleanDatabase()
 	EndIf
 	If GUICtrlRead($CBX_Preparation_CopyDatabaseExportTool) = $GUI_CHECKED And $previousActionResult = 1 Then
 		$previousActionResult = CopyDatabaseExportTool()
+	EndIf
+	If GUICtrlRead($CBX_Preparation_ChangeToRSAMode) = $GUI_CHECKED And $previousActionResult = 1 Then
+		$previousActionResult = ChangeToRSAMode()
+	EndIf
+	If GUICtrlRead($CBX_Preparation_ChangeToTsnDropMode) = $GUI_CHECKED And $previousActionResult = 1 Then
+		$previousActionResult = ChangeToTsnDropMode()
 	EndIf
 	If GUICtrlRead($CBX_Preparation_StartICSimulator) = $GUI_CHECKED And $previousActionResult = 1 Then
 		$previousActionResult = StartICSimulator()
@@ -55,6 +77,14 @@ Func RemoveOldMasterData()
 	FileDelete($TsnDropFolder & "*.*")
 	FileSetAttrib($TsnDropFolder & "ManagedFileBase\cobas4000\*.*", "-R")
 	FileDelete($TsnDropFolder & "ManagedFileBase\cobas4000\*.*")
+	;~Remove old rsa packages
+	If FileExists("D:\") Then
+		FileDelete("D:\Roche\RSA\Temp\*.zip")
+		FileDelete("D:\Roche\RSA\*.zip")
+		FileDelete("D:\Roche\RSA\Repository\*.zip")
+		FileDelete("D:\Roche\RSA\Repository\ELibrary\*.zip")
+		FileDelete("D:\Roche\RSA\Repository\ELibrary\Temp\*.zip")
+	Endif
 	SetSystemStatus("Ready", "Old master data files deleted.")
 	Return 1
 EndFunc
@@ -77,7 +107,8 @@ EndFunc
 Func CleanDatabase()
 	SetSystemStatus("Running", "Cleaning database.")
 	FileInstall("Actions\InstallerAllTablesManual.exe", "InstallerAllTablesManual.exe", 1)
-	Run("InstallerAllTablesManual.exe " & $CurrentBasePath & " " & $CurrentUserPostfix)
+
+	Run("InstallerAllTablesManual.exe " & $CurrentBasePath & " " & $CurrentDatabaseLocation & " " & $CurrentUserPostfix)
 	While ProcessExists("InstallerAllTablesManual.exe")
 		Sleep(2000)
 	WEnd
@@ -104,6 +135,76 @@ Func CopyDatabaseExportTool()
 	Return 1
 EndFunc
 
+Func ChangeToRSAMode()
+	Local $return = ChangeRSAMode(true)
+	;~ create the folder if it does not exist and the user has a D-Drive
+	;~ maybe read the rsa paht from ui server config...
+	If Not FileExists("D:\") Then
+		SetSystemStatus("Error", "You don't have a D-drive. Can not create RSA folder.")
+		Return -1
+	EndIf
+	Local $RSAFolderStructure[1] = ["D:\"]
+	_ArrayAdd($RSAFolderStructure, "D:\Roche\")
+	_ArrayAdd($RSAFolderStructure, "D:\Roche\RSA\")
+	_ArrayAdd($RSAFolderStructure, "D:\Roche\RSA\Repository\")
+	_ArrayAdd($RSAFolderStructure, "D:\Roche\RSA\Repository\ELibrary\Temp\")
+	_ArrayAdd($RSAFolderStructure, "D:\Roche\RSA\Repository\Installation\")
+	_ArrayAdd($RSAFolderStructure, "D:\Roche\RSA\Temp")
+
+	For $i = 0 To UBound($RSAFolderStructure) - 1
+		If Not FileExists($RSAFolderStructure[$i]) Then
+			If Not DirCreate($RSAFolderStructure[$i]) Then
+				SetSystemStatus("Error", "Directory '" & $RSAFolderStructure[$i] & "' could not be created.")
+				Return -1
+			EndIf
+		EndIf
+	Next
+
+
+;~ 	If Not FileExists("D:\Roche\RSA\Repository\ELibrary\Temp\") Then
+;~ 		If Not DirCreate("D:\Roche\RSA\Repository\ELibrary\Temp\") Then
+;~ 			SetSystemStatus("Error", "Directory 'D:\Roche\RSA\Repository\ELibrary\Temp\' could not be created.")
+;~ 			Return -1
+;~ 		EndIf
+;~ 	EndIf
+;~ 	If Not FileExists("D:\Roche\RSA\Repository\Installation\") Then
+;~ 		If Not DirCreate() Then
+;~ 			SetSystemStatus("Error", "Directory 'D:\Roche\RSA\Repository\Installation\' could not be created.")
+;~ 			Return -1
+;~ 		EndIf
+;~ 	If Not FileExists("D:\Roche\RSA\Temp\") Then
+
+
+	SetSystemStatus("Ready", "RSA folder structure on D drive created.")
+	Return $return
+EndFunc
+
+Func ChangeToTsnDropMode()
+	Return ChangeRSAMode(false)
+EndFunc
+
+Func ChangeRSAMode($enableRSA)
+	SetSystemStatus("Running", "Changeing the Roche.C4000.UI.Server.Main.")
+	Local $file = $CurrentBasePath & "Units\bin\Debug\Roche.C4000.UI.Server.Main.exe.config"
+	Local $stringToReplace = 'rsaUsage="true"'
+	Local $replacement = 'rsaUsage="false"'
+	If $enableRSA Then
+		$stringToReplace = 'rsaUsage="false"'
+		$replacement = 'rsaUsage="true"'
+	EndIf
+	_ReplaceStringInFile($file, $stringToReplace, $replacement)
+	;_XMLFileOpen($file)
+	;_XMLSetAttrib("/configuration/roche.itcore.systemManagement/remoteServiceAgent", "rsaUsage", $enableRSA)
+
+	$file = $CurrentBasePath & "Units\UI.Server\Source\Roche.C4000.UI.Server.Main\app.config"
+	_ReplaceStringInFile($file, $stringToReplace, $replacement)
+	;_XMLFileOpen($file)
+	;_XMLSetAttrib("/configuration/roche.itcore.systemManagement/remoteServiceAgent", "rsaUsage", $enableRSA)
+
+	SetSystemStatus("Ready", "Adapting the UI Server app.config to use rsa successfully finished.")
+	Return 1
+EndFunc
+
 Func StartICSimulator()
 	SetSystemStatus("Running", "Starting IC Simulator.")
 	If FileExists($ICSimulatorPath & $ICSimulatorProcessName) Then
@@ -122,7 +223,7 @@ Func StartHL7Simulator()
 	SetSystemStatus("Running", "Starting HL7 Simulator.")
 	Global $HL7SimulatorPID = Run($ExternalToolPath_HL7InstallPath & $HL7ProcessName , $ExternalToolPath_HL7InstallPath)
 	;~ Accept the popup
-	Sleep(2000)
+	Sleep(1000)
 	WinActivate("HL7 Host Interface Simulator [V 7.6]")
 	Send("{LEFT}")
 	Send("{ENTER}")
@@ -132,15 +233,15 @@ EndFunc
 
 Func StartIMSoftware()
 	If IsAdmin() Then
-		MsgBox(0, "IsAdmin()", "is admin")
-	Else
-		MsgBox(0, "IsAdmin()", "is NOT admin")
+		MsgBox(0, "StartIMSoftware()", "You are admin!")
+		SetSystemStatus("Error", "You try to start the process manager as admin. This will not work!")
+		Return -1
 	EndIf
 	SetSystemStatus("Running", "Starting IM Software.")
-	;$IMProcessManagerPID = Run($CurrentBasePath & "Units\bin\Debug\" & $IMProcesses[0], $CurrentBasePath & "Units\bin\Debug\")
+	$IMProcessManagerPID = Run($CurrentBasePath & "Units\bin\Debug\" & $IMProcesses[0], $CurrentBasePath & "Units\bin\Debug\")
 	;~ Wait for the UIHostProcess to start...
-	;$UIHostPID = ProcessWait($IMProcesses[2])
-	;Sleep(20000) ; Wait for Silverlight gui
+	$UIHostPID = ProcessWait($IMProcesses[2])
+	Sleep(20000) ; Wait for Silverlight gui
 	SetSystemStatus("Ready", "IM Software started.")
 	Return 1
 EndFunc

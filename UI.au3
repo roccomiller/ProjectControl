@@ -53,11 +53,11 @@ Func Main()
 
 	#region Tab
 	$hTab = GUICtrlCreateTab(1, 1, $MAINGUI_WIDTH, $MAINGUI_HEIGHT - 44 - 30)
-	#include "TestTab.au3"
-	#include "SourceControlTab.au3"
-	#include "PreparationTab.au3"
-	#include "RoundtripsTab.au3"
-	#include "BackupTab.au3"
+	#include "Tabs\TestTab.au3"
+	#include "Tabs\SourceControlTab.au3"
+	#include "Tabs\PreparationTab.au3"
+	#include "Tabs\RoundtripsTab.au3"
+	#include "Tabs\BackupTab.au3"
 	GUICtrlCreateTabItem("")
 	#endregion Tab
 
@@ -89,9 +89,21 @@ Func ShowSettingsPopup()
 	Local $top = 0
 	Local $settingsPopup = GUICreate($TXT_POPUP_SETTINGS_Settings, $popupWidth, $popupHeight)
 	Opt("GUIOnEventMode",0)
+
+	;~ Choose your database location (local or remote)
+	#region database location
+	$top = $marginTop + (0 * $lineHeight)
+	GUICtrlCreateLabel($TXT_POPUP_SETTINGS_DatabaseLocation, $ColumsLeft[0], $top, $labelWidth, 20)
+	Local $newDatabaseLocation = $CurrentDatabaseLocation
+	Local $DatabaseLocationInput = GUICtrlCreateCombo($DatabaseLocations[0], $ColumsLeft[1], $top, 280, 20)
+	GUICtrlSetData($DatabaseLocationInput, ConvertArrayToComboBoxString($DatabaseLocations), $CurrentDatabaseLocation)
+	Local $hHelpIcon_DatabaseLocation = GUICtrlCreateIcon($ResourceFile, -6, $ColumsLeft[3], $top, $ICON_HELP_HEIGHT, $ICON_HELP_HEIGHT)
+	GUICtrlSetTip($hHelpIcon_DatabaseLocation, $TXT_POPUP_SETTINGS_DatabaseLocation_Help)
+	#endregion database location
+
 	;~ Set your user postfix for database
 	#region user postfix
-	$top = $marginTop + (0 * $lineHeight)
+	$top = $marginTop + (1 * $lineHeight)
 	GUICtrlCreateLabel($TXT_POPUP_SETTINGS_UserPostfix, $ColumsLeft[0], $top, $labelWidth, 20)
 	Local $newUserPostfix = $CurrentUserPostfix
 	Local $UserPostfixInput = GUICtrlCreateInput($CurrentUserPostfix, $ColumsLeft[1], $top, 280, 20)
@@ -101,7 +113,7 @@ Func ShowSettingsPopup()
 
 	;~ Select if you want to use the simulator or not
 	#region Simulator usage
-	$top = $marginTop + (1 * $lineHeight)
+	$top = $marginTop + (2 * $lineHeight)
 	GUICtrlCreateLabel($TXT_POPUP_SETTINGS_UseICSimulator, $ColumsLeft[0], $top, $labelWidth, 20)
 	Local $newUseICSimulator = $CurrentUseICSimulator
 	Local $UseICSimulatorInput = GUICtrlCreateCombo($UseICSimulator[0], $ColumsLeft[1], $top, 280, 20)
@@ -112,7 +124,7 @@ Func ShowSettingsPopup()
 
 	;~ Select the current environment
 	#region environment settings
-	$top = $marginTop + (2 * $lineHeight)
+	$top = $marginTop + (3 * $lineHeight)
 	GUICtrlCreateLabel($TXT_POPUP_SETTINGS_Environment, $ColumsLeft[0], $top, $labelWidth, 20)
 	Local $newEnvironment = $CurrentEnvironment
 	Local $EnvironmentInput = GUICtrlCreateCombo($Environments[0], $ColumsLeft[1], $top, 280, 20)
@@ -123,7 +135,7 @@ Func ShowSettingsPopup()
 
 	;~ Select the base path
 	#region base path settings
-	$top = $marginTop + (3 * $lineHeight)
+	$top = $marginTop + (4 * $lineHeight)
 	Local $newBasePath = $CurrentBasePath
 	GUICtrlCreateLabel($TXT_POPUP_SETTINGS_BasePath, $ColumsLeft[0], $top, $labelWidth, 20)
 	Local $BasePathInput = GUICtrlCreateLabel($CurrentBasePath, $ColumsLeft[1], $top, 280, 20)
@@ -146,6 +158,8 @@ Func ShowSettingsPopup()
 	While 1
 		Local $msg = GUIGetMsg()
 		Switch $msg
+			Case $DatabaseLocationInput
+				$newDatabaseLocation = GUICtrlRead($DatabaseLocationInput)
 			Case $UserPostfixInput
 				$newUserPostfix = GUICtrlRead($UserPostfixInput)
 			Case $UseICSimulatorInput
@@ -158,6 +172,7 @@ Func ShowSettingsPopup()
 					GUICtrlSetData($BasePathInput, $newBasePath)
 				EndIf
 			Case $BTN_SaveSettings
+				$CurrentDatabaseLocation = $newDatabaseLocation
 				$CurrentUserPostfix = $newUserPostfix
 				$CurrentUseICSimulator = $newUseICSimulator
 				$CurrentEnvironment = $newEnvironment

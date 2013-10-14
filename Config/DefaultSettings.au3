@@ -8,6 +8,9 @@ HotKeySet("{F1}", "ShowHelpFile")
 Global Const $SettingsFileName = @ScriptDir & "\settings.xml"
 Global Const $LogFileName = @ScriptDir & "\log.txt"
 Global Const $DocumentationFileName = @ScriptDir & "\Documentation\Documentation.chm"
+
+Global $DatabaseLocations[2] = ["local", "remote"]
+Global $CurrentDatabaseLocation = $DatabaseLocations[0]
 Global $CurrentUserPostfix = ""
 Global $UseICSimulator[3] = ["Use IC Simulator", "Use IC Simulator, but ask", "Do not use IC Simulator"]
 Global $CurrentUseICSimulator = $UseICSimulator[0]

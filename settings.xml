@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<c4000AutoItSettings>
+	<DatabaseLocation Location="local"/>
+	<UserPosfix Postfix=""/>
+	<UseICSimulator Use="Use IC Simulator"/>
+	<Environment System="Development"/>
+	<BasePath Path="C:\Dev\C4k\IM\Dev\"/>
+	<IMProcesses>
+		<IMProcess Name="Roche.C4000.ProcessManagement.ProcessManager.exe"/>
+		<IMProcess Name="Roche.C4000.UI.Server.Main.exe"/>
+		<IMProcess Name="iexplore.exe"/>
+		<IMProcess Name="Roche.C4000.Scheduling.Scheduler.exe"/>
+		<IMProcess Name="Roche.C4000.ResourceManagement.ResourceManager.exe"/>
+		<IMProcess Name="Roche.C4000.ProcessManagement.CommonServiceHost.exe"/>
+		<IMProcess Name="Roche.C4000.InstrumentAccess.ServiceHost.exe"/>
+		<IMProcess Name="Roche.C4000.DmIm.DataManagerClient.exe"/>
+		<IMProcess Name="Roche.C4000.Calculator.exe"/>
+	</IMProcesses>
+</c4000AutoItSettings>

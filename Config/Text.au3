@@ -10,9 +10,13 @@ Global Const $TXT_MENU_Help = "Help?" & @TAB & "F1"
 
 #region PopUps
 Global Const $TXT_POPUP_SETTINGS_Settings = "Settings"
+Global Const $TXT_POPUP_SETTINGS_DatabaseLocation = "Database location: "
+Global Const $TXT_POPUP_SETTINGS_DatabaseLocation_Help = _
+$DatabaseLocations[0] & ": " & @TAB & "Use a local installation of oracle." _
+& @CRLF & $DatabaseLocations[1] & ": " & @TAB & "Use the remote server (192.168.1.100) installation of oracle server."
 
-$TXT_POPUP_SETTINGS_UserPostfix = "User posfix: "
-$TXT_POPUP_SETTINGS_UserPostfix_Help = "This is the postfix used for your database schema."
+Global Const $TXT_POPUP_SETTINGS_UserPostfix = "User posfix: "
+Global Const $TXT_POPUP_SETTINGS_UserPostfix_Help = "This is the postfix used for your database schema."
 
 Global Const $TXT_POPUP_SETTINGS_UseICSimulator = "Use IC Simulator: "
 Global Const $TXT_POPUP_SETTINGS_UseICSimulator_Help = _
@@ -54,7 +58,8 @@ Global Const $TEXT_TAB_SOURCECONTROL_CBX_UndoAllPendingChanges = "Undo all pendi
 Global Const $TEXT_TAB_SOURCECONTROL_CBX_RemoveDev = "Remove Dev"
 Global Const $TEXT_TAB_SOURCECONTROL_CBX_GetLatest = "Get latest version"
 Global Const $TEXT_TAB_SOURCECONTROL_CBX_GetTheDependecies = "Get the dependecies"
-Global Const $TEXT_TAB_SOURCECONTROL_CBX_BuildIMSolution = "Build the IM solution"
+Global Const $TEXT_TAB_SOURCECONTROL_CBX_BuildIMSolutionDebug = "Build IM solution (Debug)"
+Global Const $TEXT_TAB_SOURCECONTROL_CBX_BuildIMSolutionDebugNoTests = "Build IM solution (DebugNoTests)"
 Global Const $TEXT_TAB_SOURCECONTROL_CBX_RemoveComitServices = "Redeploy Comit services"
 Global Const $TEXT_TAB_SOURCECONTROL_CBX_AdaptTheConfigFiles = "Adapt the config files"
 Global Const $TEXT_TAB_SOURCECONTROL_CBX_CheckAll = "Check all"
@@ -65,10 +70,12 @@ Global Const $TEXT_TAB_SOURCECONTROL_CBX_CheckAll_ToolTip = "This will check / u
 Global Const $TEXT_TAB_PREPARATION_Tab = "Preparation"
 Global Const $TEXT_TAB_PREPARATION_GROUP_Preparation = "Preparation actions"
 Global Const $TEXT_TAB_PREPARATION_CBX_Dummy = "Dummy checkbox"
-Global Const $TEXT_TAB_PREPARATION_CBX_RemoveOldMasterData = "Remove old MasterData"
+Global Const $TEXT_TAB_PREPARATION_CBX_RemoveOldMasterData = "Remove old MasterData (inc. RSA)"
 Global Const $TEXT_TAB_PREPARATION_CBX_RemoveOldLogfiles = "Remove old Logfiles"
 Global Const $TEXT_TAB_PREPARATION_CBX_CleanDatabase = "Clean Database"
 Global Const $TEXT_TAB_PREPARATION_CBX_CopyDatabaseExportTool = "Copy Database Export Tool"
+Global Const $TEXT_TAB_PREPARATION_CBX_ChangeToRSAMode = "Change to RSA mode"
+Global Const $TEXT_TAB_PREPARATION_CBX_ChangeToTsnDropMode = "Change to TsnDrop mode"
 Global Const $TEXT_TAB_PREPARATION_CBX_StartICSimulator = "Start IC Simulator"
 Global Const $TEXT_TAB_PREPARATION_CBX_StartHL7Simulator = "Start HL7 Simulator"
 Global Const $TEXT_TAB_PREPARATION_CBX_StartIMSoftware = "Start IM software"
