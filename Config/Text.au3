@@ -54,11 +54,14 @@ Global Const $TEXT_TAB_TEST_CBX_CheckAll_ToolTip = "This will check / uncheck al
 Global Const $TEXT_TAB_SOURCECONTROL_Tab = "Source control"
 Global Const $TEXT_TAB_SOURCECONTROL_GROUP_SourceControl = "Source control actions"
 Global Const $TEXT_TAB_SOURCECONTROL_CBX_Dummy = "Dummy checkbox"
+Global Const $TEXT_TAB_SOURCECONTROL_CBX_ShowTFSHistory = "Show TFS history"
 Global Const $TEXT_TAB_SOURCECONTROL_CBX_UndoAllPendingChanges = "Undo all pending changes"
 Global Const $TEXT_TAB_SOURCECONTROL_CBX_RemoveDev = "Remove Dev"
 Global Const $TEXT_TAB_SOURCECONTROL_CBX_GetLatest = "Get latest version"
 Global Const $TEXT_TAB_SOURCECONTROL_CBX_GetTheDependecies = "Get the dependecies"
+Global Const $TEXT_TAB_SOURCECONTROL_CBX_CleanBuildDir = "Clean build directory"
 Global Const $TEXT_TAB_SOURCECONTROL_CBX_BuildIMSolutionDebug = "Build IM solution (Debug)"
+Global Const $TEXT_TAB_SOURCECONTROL_CBX_BuildIMSolutionDebugNoInstaller = "Build IM solution (DebugNoInstaller)"
 Global Const $TEXT_TAB_SOURCECONTROL_CBX_BuildIMSolutionDebugNoTests = "Build IM solution (DebugNoTests)"
 Global Const $TEXT_TAB_SOURCECONTROL_CBX_RemoveComitServices = "Redeploy Comit services"
 Global Const $TEXT_TAB_SOURCECONTROL_CBX_AdaptTheConfigFiles = "Adapt the config files"
@@ -68,6 +71,8 @@ Global Const $TEXT_TAB_SOURCECONTROL_CBX_CheckAll_ToolTip = "This will check / u
 Global Const $TEXT_TAB_SOURCECONTROL_GROUP_CheckAndTestIt = "Check and test it"
 Global Const $TEXT_TAB_SOURCECONTROL_CBX_RunFxCopAll = "Run FxCop on solution"
 Global Const $TEXT_TAB_SOURCECONTROL_CBX_RunFxCopSelective = "Run FxCop for project: "
+Global Const $TEXT_TAB_SOURCECONTROL_CBX_CleanTestDataBase = "Clean test Database (itest)"
+
 Global Const $TEXT_TAB_SOURCECONTROL_CBX_CheckAndTestIt_CheckAll = "Check all"
 Global Const $TEXT_TAB_SOURCECONTROL_CBX_CheckAndTestIt_CheckAll_ToolTip = "This will check / uncheck all the checkboxes in this group."
 #endregion Source Control Tab
@@ -76,6 +81,7 @@ Global Const $TEXT_TAB_SOURCECONTROL_CBX_CheckAndTestIt_CheckAll_ToolTip = "This
 Global Const $TEXT_TAB_PREPARATION_Tab = "Preparation"
 Global Const $TEXT_TAB_PREPARATION_GROUP_Preparation = "Preparation actions"
 Global Const $TEXT_TAB_PREPARATION_CBX_Dummy = "Dummy checkbox"
+Global Const $TEXT_TAB_SOURCECONTROL_CBX_BuildIMSolution = "Build the solution"
 Global Const $TEXT_TAB_PREPARATION_CBX_RemoveOldMasterData = "Remove old MasterData (inc. RSA)"
 Global Const $TEXT_TAB_PREPARATION_CBX_RemoveOldLogfiles = "Remove old Logfiles"
 Global Const $TEXT_TAB_PREPARATION_CBX_CleanDatabase = "Clean Database"
@@ -86,6 +92,7 @@ Global Const $TEXT_TAB_PREPARATION_CBX_StartICSimulator = "Start IC Simulator"
 Global Const $TEXT_TAB_PREPARATION_CBX_StartHL7Simulator = "Start HL7 Simulator"
 Global Const $TEXT_TAB_PREPARATION_CBX_StartIMSoftware = "Start IM software"
 Global Const $TEXT_TAB_PREPARATION_CBX_CopyMasterDatafiles = "Copy All MasterData files"
+
 Global Const $TEXT_TAB_PREPARATION_CBX_CheckAll = "Check all"
 Global Const $TEXT_TAB_PREPARATION_CBX_CheckAll_ToolTip = "This will check / uncheck all the checkboxes in this group."
 #endregion Preparation Tab
@@ -94,6 +101,9 @@ Global Const $TEXT_TAB_PREPARATION_CBX_CheckAll_ToolTip = "This will check / unc
 Global Const $TEXT_TAB_ROUNDTRIPS_Tab = "Roundtrips"
 Global Const $TEXT_TAB_ROUNDTRIPS_GROUP_Roundtrips = "Roundtrips actions"
 Global Const $TEXT_TAB_ROUNDTRIPS_CBX_Dummy = "Dummy checkbox"
+Global Const $TEXT_TAB_ROUNDTRIPS_CBX_BasicGluc3Calibration = "Run GLUC3 calibration"
+Global Const $TEXT_TAB_ROUNDTRIPS_CBX_BasicGluc3SampleOrder = "Run GLUC3 sample order"
+
 Global Const $TEXT_TAB_ROUNDTRIPS_CBX_CheckAll = "Check all"
 Global Const $TEXT_TAB_ROUNDTRIPS_CBX_CheckAll_ToolTip = "This will check / uncheck all the checkboxes in this group."
 #endregion Roundtrips Tab
@@ -102,6 +112,7 @@ Global Const $TEXT_TAB_ROUNDTRIPS_CBX_CheckAll_ToolTip = "This will check / unch
 Global Const $TEXT_TAB_BACKUP_Tab = "Backup"
 Global Const $TEXT_TAB_BACKUP_GROUP_Backup = "Backup actions"
 Global Const $TEXT_TAB_BACKUP_CBX_Dummy = "Dummy checkbox"
+
 Global Const $TEXT_TAB_BACKUP_CBX_CheckAll = "Check all"
 Global Const $TEXT_TAB_BACKUP_CBX_CheckAll_ToolTip = "This will check / uncheck all the checkboxes in this group."
 #endregion Backup Tab

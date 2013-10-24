@@ -3,7 +3,8 @@
 	<DatabaseLocation Location="local"/>
 	<UserPosfix Postfix=""/>
 	<UseICSimulator Use="Use IC Simulator"/>
-	<Environment System="Development"/>
+	<Environment System="AutoIt-Dev"/>
+	<Build Configuration="DebugNoInstaller"/>
 	<BasePath Path="C:\Dev\C4k\IM\Dev\"/>
 	<IMProcesses>
 		<IMProcess Name="Roche.C4000.ProcessManagement.ProcessManager.exe"/>

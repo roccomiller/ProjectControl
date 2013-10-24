@@ -26,8 +26,12 @@
 ;#include <Libraries\resources.au3>
 #include "Config\DefaultSettings.au3"
 #include "Config\Text.au3"
+#include "Config\UICoordinates_HPZR2740w.au3"
 #include "Helpers\CommonHelpers.au3"
 #include "Helpers\UIHelpers.au3"
+#include "Helpers\RoundtripHelpers.au3"
+#include "Helpers\BrowserHelpers.au3"
+#include "Helpers\ICSimulatorHelpers.au3"
 #include "Actions\TestActions.au3"
 #include "Actions\SourceControlActions.au3"
 #include "Actions\PreparationActions.au3"
@@ -38,7 +42,6 @@
 
 Initialize()
 Main()
-Deinitialize()
 
 Func Main()
 	Global $mainGui = GUICreate("C4000 Project Control", $MAINGUI_WIDTH, $MAINGUI_HEIGHT)
@@ -63,6 +66,7 @@ Func Main()
 
 	Global $BTN_KillAllProcesses = CreateButton("Kill all processes.", 10, $MAINGUI_HEIGHT - 44 - 25, 100)
 	GUICtrlSetOnEvent($BTN_KillAllProcesses, "KillAllProcesses")
+	_ArrayAdd($ActionButtons, $BTN_KillAllProcesses)
 
 	;~ Status bar
 	Global $hStatusBar = _GUICtrlStatusBar_Create($MainGUI)

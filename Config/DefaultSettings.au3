@@ -1,22 +1,30 @@
 ;~
-
+;~ fix autoit tool settings
+#region fix autoit tool settings
 Global $ScriptPaused
 HotKeySet("{ESC}", "Terminate")
 HotKeySet("{PAUSE}", "TogglePause")
 HotKeySet("{F1}", "ShowHelpFile")
-
 Global Const $SettingsFileName = @ScriptDir & "\settings.xml"
 Global Const $LogFileName = @ScriptDir & "\log.txt"
 Global Const $DocumentationFileName = @ScriptDir & "\Documentation\Documentation.chm"
+#endregion fix autoit tool settings
 
+;~ settings changable by user
+#region settings changable by user
 Global $DatabaseLocations[2] = ["local", "remote"]
 Global $CurrentDatabaseLocation = $DatabaseLocations[0]
 Global $CurrentUserPostfix = ""
 Global $UseICSimulator[3] = ["Use IC Simulator", "Use IC Simulator, but ask", "Do not use IC Simulator"]
 Global $CurrentUseICSimulator = $UseICSimulator[0]
-Global $Environments[2] = ["Development", "ControlUnit"]
+Global $Environments[3] = ["Development", "ControlUnit", "AutoIt-Dev"]
 Global $CurrentEnvironment = $Environments[0]
+Global $SupportedBuildConfigurations[3] = ["DebugNoInstaller", "DebugNoTests", "Debug"]
+Global $CurrentBuildConfiguration = $SupportedBuildConfigurations[0]
+#endregion settings changable by user
+
 ;~ C4000 folder structure settings
+#region C4000 folder and file structure settings
 Global $CurrentBasePath = "C:\Dev\C4k\IM\Dev\" ; Chaneable in settings.
 Global Const $LogFolder = $CurrentBasePath & "Units\bin\Debug\Log\"
 Global Const $TsnDropFolder = $CurrentBasePath & "Units\bin\Debug\TsnDrop\"
@@ -24,10 +32,11 @@ Global Const $c302AppFolder = $CurrentBasePath & "Environment\MasterData\RT\c302
 Global Const $e201AppFolder = $CurrentBasePath & "Environment\MasterData\RT\e201\"
 Global Const $iseAppFolder = $CurrentBasePath & "Environment\MasterData\RT\ISE\"
 Global Const $MasterDataFilePrefix = "cobas4000_"
+#endregion C4000 folder and file structure settings
 
-;~ Process names
-Global Const $ICSimulatorPath = $CurrentBasePath & "Environment\InstrumentSimulator\"
-Global Const $ICSimulatorProcessName = "ICSimulator.exe"
+;~ C4000 process settings
+#region C4000 process settings
+Global Const $ICSimulatorProcess[3] = [$CurrentBasePath & "Environment\InstrumentSimulator\", "ICSimulator.exe", "IC Simulator"]
 Global $IMProcesses[9]
 $IMProcesses[0] = "Roche.C4000.ProcessManagement.ProcessManager.exe"
 $IMProcesses[1] = "Roche.C4000.UI.Server.Main.exe"
@@ -38,15 +47,21 @@ $IMProcesses[5] = "Roche.C4000.ProcessManagement.CommonServiceHost.exe"
 $IMProcesses[6] = "Roche.C4000.InstrumentAccess.ServiceHost.exe"
 $IMProcesses[7] = "Roche.C4000.DmIm.DataManagerClient.exe"
 $IMProcesses[8] = "Roche.C4000.Calculator.exe"
+Global Const $IMUIWindowTitle = "cobas4000"
+#endregion C4000 process settings
 
 ;~ External tool settings
+#region External tool settings
 Global Const $AppCMDPath = "%systemroot%\system32\inetsrv\appcmd.exe"
 Global Const $ExternalToolPath_Tfs = "C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\IDE\TF.exe"
 Global Const $FxCopToolPath = "C:\Program Files (x86)\Microsoft Visual Studio 11.0\Team Tools\Static Analysis Tools\FxCop\FxCopCmd.exe"
 Global Const $msBuildPath = "C:\Windows\Microsoft.NET\Framework\v4.0.30319\msbuild.exe"
-Global Const $ExternalToolPath_HL7InstallPath = "C:\Program Files (x86)\Host_Tools_76\"
-Global Const $HL7ProcessName = "hl7sim.exe"
+Global Const $HL7SimulatorProcess[3] = ["C:\Program Files (x86)\Host_Tools_76\", "hl7sim.exe", "HL7 Host Interface Simulator  [V 7.6]"]
+;$HL7Process[0] = "C:\Program Files (x86)\Host_Tools_76\"
+;$HL7Process[1] = "hl7sim.exe"
+;$HL7Process[2] = "HL7 Host Interface Simulator  [V 7.6]"
 Global Const $GetDependenciesPath = $CurrentBasePath & "Environment\RocheBuildTools\Roche.Build.Tools.GetDependenciesConsole.exe"
+#endregion External tool settings
 
 #region UI settings
 Global Const $MAINGUI_WIDTH = 800
@@ -82,9 +97,9 @@ Global $hStatusBar, $SystemStatus, $OldSystemStatus, $ScriptPaused
 Global $ResourceFile = @ScriptFullPath
 Global $TestCheckBoxes[1], $SourceControlCheckBoxes[1], $SourceControlCheckAndTestItCheckBoxes[1], $PreparationCheckBoxes[1], $RoundtripsCheckBoxes[1], $BackupCheckBoxes[1], $CheckAllCheckBoxes[1]
 Global $ActionButtons[1]
-Global $includeTest = True
-Global $includeSourcControl = True
-Global $includePreparation = True
-Global $includeRoundtrips = True
-Global $includeBackup = True
+Global $includeTest = False
+Global $includeSourceControl = False
+Global $includePreparation = False
+Global $includeRoundtrips = False
+Global $includeBackup = False
 #endregion

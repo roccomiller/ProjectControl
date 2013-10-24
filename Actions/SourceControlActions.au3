@@ -1,11 +1,14 @@
 
 ;~ Declare all used checkboxes here to prevent warnings in the usage
 #region Checkbox declaration
+Global $CBX_SourceControl_ShowTfsHistory
 Global $CBX_SourceControl_UndoAllPendingChanges
 Global $CBX_SourceControl_RemoveDev
 Global $CBX_SourceControl_GetLatest
 Global $CBX_SourceControl_GetTheDependecies
-Global $CBX_BuildIMSolutionDebugNoTests
+Global $CBX_SourceControl_CleanBuildDir
+Global $CBX_SourceControl_BuildIMSolutionDebugNoTests
+Global $CBX_SourceControl_BuildIMSolutionDebugNoInstaller
 Global $CBX_SourceControl_BuildIMSolutionDebug
 Global $CBX_SourceControl_RemoveComitServices
 Global $CBX_SourceControl_AdaptTheConfigFiles
@@ -13,19 +16,29 @@ Global $CBX_SourceControl_All
 
 Global $CBX_SourceControl_RunFxCopAll
 Global $CBX_SourceControl_RunFxCopSelective
+Global $CBX_SourceControl_CleanTestDataBase
 Global $CBX_SourceControl_CheckAndTestIt_All
 #endregion Checkbox declaration
 
 #region action tab helpers
-Func SetBuildIMSolutionDebugNoTestCheckBox()
-	If GUICtrlRead($TEXT_TAB_SOURCECONTROL_CBX_BuildIMSolutionDebugNoTests) = $GUI_CHECKED Then
+Func SetBuildIMSolutionDebugNoTestsCheckBox()
+	If GUICtrlRead($CBX_SourceControl_BuildIMSolutionDebugNoTests) = $GUI_CHECKED Then
+		GUICtrlSetState($CBX_SourceControl_BuildIMSolutionDebugNoInstaller, $GUI_UNCHECKED)
+		GUICtrlSetState($CBX_SourceControl_BuildIMSolutionDebug, $GUI_UNCHECKED)
+	EndIf
+EndFunc
+
+Func SetBuildIMSolutionDebugNoInstallerCheckBox()
+	If GUICtrlRead($CBX_SourceControl_BuildIMSolutionDebugNoInstaller) = $GUI_CHECKED Then
+		GUICtrlSetState($CBX_SourceControl_BuildIMSolutionDebugNoTests, $GUI_UNCHECKED)
 		GUICtrlSetState($CBX_SourceControl_BuildIMSolutionDebug, $GUI_UNCHECKED)
 	EndIf
 EndFunc
 
 Func SetBuildIMSolutionDebugCheckBox()
 	If GUICtrlRead($CBX_SourceControl_BuildIMSolutionDebug) = $GUI_CHECKED Then
-		GUICtrlSetState($TEXT_TAB_SOURCECONTROL_CBX_BuildIMSolutionDebugNoTests, $GUI_UNCHECKED)
+		GUICtrlSetState($CBX_SourceControl_BuildIMSolutionDebugNoTests, $GUI_UNCHECKED)
+		GUICtrlSetState($CBX_SourceControl_BuildIMSolutionDebugNoInstaller, $GUI_UNCHECKED)
 	EndIf
 EndFunc
 
@@ -42,6 +55,9 @@ EndFunc
 Func SourceControlAction_Click()
 	DisableAllControlls()
 	Local $previousActionResult = 1
+	If GUICtrlRead($CBX_SourceControl_ShowTfsHistory) = $GUI_CHECKED And $previousActionResult = 1 Then
+		$previousActionResult = ShowHistory()
+	EndIf
 	If GUICtrlRead($CBX_SourceControl_UndoAllPendingChanges) = $GUI_CHECKED And $previousActionResult = 1 Then
 		$previousActionResult = UndoAllPendingChanges()
 	EndIf
@@ -54,10 +70,14 @@ Func SourceControlAction_Click()
 	If GUICtrlRead($CBX_SourceControl_GetTheDependecies) = $GUI_CHECKED And $previousActionResult = 1 Then
 		$previousActionResult = GetTheDependecies()
 	EndIf
-	If GUICtrlRead($TEXT_TAB_SOURCECONTROL_CBX_BuildIMSolutionDebugNoTests) = $GUI_CHECKED And $previousActionResult = 1 Then
-		$previousActionResult = BuildIMSolution("DebugNoTests")
+	If GUICtrlRead($CBX_SourceControl_CleanBuildDir) = $GUI_CHECKED And $previousActionResult = 1 Then
+		$previousActionResult = CleanBuildDir()
 	EndIf
-	If GUICtrlRead($CBX_SourceControl_BuildIMSolutionDebug) = $GUI_CHECKED And $previousActionResult = 1 Then
+	If GUICtrlRead($CBX_SourceControl_BuildIMSolutionDebugNoTests) = $GUI_CHECKED And $previousActionResult = 1 Then
+		$previousActionResult = BuildIMSolution("DebugNoTests")
+	ElseIf GUICtrlRead($CBX_SourceControl_BuildIMSolutionDebugNoInstaller) = $GUI_CHECKED And $previousActionResult = 1 Then
+		$previousActionResult = BuildIMSolution("DebugNoInstaller")
+	ElseIf GUICtrlRead($CBX_SourceControl_BuildIMSolutionDebug) = $GUI_CHECKED And $previousActionResult = 1 Then
 		$previousActionResult = BuildIMSolution("Debug")
 	EndIf
 	If GUICtrlRead($CBX_SourceControl_RemoveComitServices) = $GUI_CHECKED And $previousActionResult = 1 Then
@@ -69,6 +89,19 @@ Func SourceControlAction_Click()
 	EnableAllControlls()
 EndFunc
 ; RunWait($cmdLine[1] & 'Environment\OracleScripts\InstallerAllTablesManual.cmd autorun local itest')
+
+Func ShowHistory()
+	SetSystemStatus("Running", "Getting the history for the branch " & $CurrentBasePath & ".")
+	Local $cmd = $ExternalToolPath_Tfs & " history /recursive ..\Dev"
+	;Local $cmd = $ExternalToolPath_Tfs & " status" ;  Show pending changes -> does not work beacuse it cloeses the window
+	SetSystemStatus("Waiting", "Showing the TFS history window. Please close it to continue...")
+	If RunWait($cmd, $CurrentBasePath) = 0 And Not (@error = 0) Then
+		SetSystemStatus("Error", "There was a problem getting the history for " & $CurrentBasePath & ".")
+		Return -1
+	EndIf
+	SetSystemStatus("Ready", "I recently showed you the history of " & $CurrentBasePath & ".")
+	Return 1
+EndFunc
 
 Func UndoAllPendingChanges()
    SetSystemStatus("Waiting", "Waiting for your confirmation.")
@@ -91,7 +124,7 @@ EndFunc
 
 Func RemoveDev()
    SetSystemStatus("Running", "Removing folders in selected branch.")
-   Local $subfolders = _FileListToArray($CurrentBasePath)
+   Local $subfolders = _FileListToArray($CurrentBasePath, "*", 2)
    For $i = 1 To UBound($subfolders) - 1
 	  UpdateStatusBarMsg("Removing " & $CurrentBasePath & $subfolders[$i] & ". Please wait.")
 	  DirRemove($CurrentBasePath & $subfolders[$i], 1)
@@ -103,7 +136,7 @@ EndFunc
 Func GetLatest()
 	SetSystemStatus("Running", "Getting the latest source version from TFS repository.")
 	Local $cmd = $ExternalToolPath_Tfs & " get /recursive /force /overwrite /version:T"
-	If RunWait($cmd, $CurrentBasePath) = 0 Then
+	If RunWait($cmd, $CurrentBasePath) = 0 And Not (@error = 0) Then
 		SetSystemStatus("Error", "There was a problem getting the latest code from tfs.")
 		Return -1
 	EndIf
@@ -128,35 +161,57 @@ Func GetTheDependecies()
    Return 1
 EndFunc
 
-Func BuildIMSolution($buildConfiguration = "Debug")
-	SetSystemStatus("Running", "Building the c4000 solution. Please wait...")
-	;~ Kill all running c4000 processes but ask first if one is running
-	Local $c4000IsRunning = False
-	For $i = 0 To UBound($IMProcesses) - 1
-		If Not ($IMProcesses[$i] = $IMProcesses[2]) And ProcessExists($IMProcesses[$i]) Then
-			$c4000IsRunning = True
-		ExitLoop
+Func CleanBuildDir()
+	SetSystemStatus("Running", "Removing bin\Debug\ content.")
+	Local $success = 1
+	Local $subPath = "Units\bin\Debug\"
+	Local $subfolders = _FileListToArray($CurrentBasePath & $subPath, "*", 2)
+	For $i = 1 To UBound($subfolders) - 1
+		UpdateStatusBarMsg("Removing " & $CurrentBasePath & $subPath & $subfolders[$i] & ". Please wait.")
+		$success = DirRemove($CurrentBasePath & $subPath & $subfolders[$i], 1)
+		If $success = 0 Then
+			MsgBox(0, "Could not delete folder", $CurrentBasePath & $subPath & $subfolders[$i])
 		EndIf
 	Next
-	Local $uiHandle = WinGetHandle("cobas4000")
-	If Not ($uiHandle = "") And @error = 1 Then
-		$c4000IsRunning = True
-	EndIf
-	If ProcessExists($HL7ProcessName) Then
-		$c4000IsRunning = True
-	EndIf
-	If ProcessExists($ICSimulatorProcessName) Then
-		$c4000IsRunning = True
-	EndIf
-	;~ 3 => Yes, No, Cancel | Yes = 6, No = 7 and Cancel = 2
-	If $c4000IsRunning Then
+	Local $files = _FileListToArray($CurrentBasePath & $subPath, "*", 1)
+	For $i = 1 To UBound($files) - 1
+		UpdateStatusBarMsg("Removing " & $CurrentBasePath & $subPath & $files[$i] & ". Please wait.")
+		$success = FileDelete($CurrentBasePath & $subPath & $files[$i])
+		If $success = 0 Then
+			MsgBox(0, "Could not delete file", $CurrentBasePath & $subPath & $files[$i])
+		EndIf
+	Next
+	SetSystemStatus("Ready", "Folders and files in " & $CurrentBasePath & $subPath & " successfully removed.")
+	Return $success
+EndFunc
+
+Func BuildIMSolution($buildConfiguration = "Debug")
+	SetSystemStatus("Running", "Building the c4000 solution. Please wait...")
+	Local $checkRunning = CheckRunningProcesses(True, True, True)
+	If $checkRunning[0] Or $checkRunning[1] Or $checkRunning[2] Then
+		;~ Kill all running c4000 processes but ask first if one is running
 		SetSystemStatus("Waiting", "Waiting for your confirmation.")
-		$killProcessesFirst = MsgBox(3, "C4000 already running", "It seems that at least one c4000 process is running. Do you want to stop all c4000 processes?")
+		Local $msg = "It seems that "
+		If $checkRunning[0] Then
+			$msg &= "a c4000 process "
+		EndIf
+		If $checkRunning[1] Then
+			$msg &= "the IC simulator "
+		EndIf
+		If $checkRunning[2] Then
+			$msg &= "the HL7 simulator "
+		EndIf
+		$msg &= "is still running. Do you want to stop all running processes?"
+		Local $killProcessesFirst = MsgBox(3, "C4000 already running", $msg)
+		;~ 3 => Yes, No, Cancel | Yes = 6, No = 7 and Cancel = 2
 		If $killProcessesFirst = 6 Then
 			KillAllProcesses()
 			StartBildIMSolution($buildConfiguration)
 		ElseIf $killProcessesFirst = 7 Then
 			StartBildIMSolution($buildConfiguration)
+		ElseIf $killProcessesFirst = 2 Then
+			SetSystemStatus("Warning", "Building the solution was canceled by the user.")
+			Return -1
 		EndIf
 	Else
 		StartBildIMSolution($buildConfiguration)
@@ -236,6 +291,9 @@ Func SourceControlAction_CheckAndTestIt_Click()
 	If GUICtrlRead($CBX_SourceControl_RunFxCopSelective) = $GUI_CHECKED And $previousActionResult = 1 Then
 		$previousActionResult = RunFxCopSelective()
 	EndIf
+	If GUICtrlRead($CBX_SourceControl_CleanTestDataBase) = $GUI_CHECKED And $previousActionResult = 1 Then
+		$previousActionResult = CleanTestDataBase()
+	EndIf
 	EnableAllControlls()
 EndFunc
 
@@ -256,6 +314,22 @@ EndFunc
 
 Func RunFxCopSelective()
 
+EndFunc
+
+Func CleanTestDataBase()
+	SetSystemStatus("Running", "Cleaning test database (itest postfix).")
+	FileInstall("Actions\InstallerAllTablesManual.exe", "InstallerAllTablesManual.exe", 1)
+	Run("InstallerAllTablesManual.exe " & $CurrentBasePath & " " & $CurrentDatabaseLocation & " itest")
+	While ProcessExists("InstallerAllTablesManual.exe")
+		Sleep(2000)
+	WEnd
+	Local $tries = 0
+	While FileExists("InstallerAllTablesManual.exe") And $tries < 10
+		FileDelete("InstallerAllTablesManual.exe")
+		$tries += 1
+	WEnd
+	SetSystemStatus("Ready", "Test database (itest postfix) cleaned.")
+	Return 1
 EndFunc
 
 #endregion Group source control check and test it

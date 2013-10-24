@@ -1,6 +1,7 @@
 
 ;~ Declare all used checkboxes here to prevent warnings in the usage
 #region Checkbox declaration
+Global $CBX_Preparation_BuildIMSolution
 Global $CBX_Preparation_RemoveOldMasterData
 Global $CBX_Preparation_RemoveOldLogfiles
 Global $CBX_Preparation_CleanDatabase
@@ -37,6 +38,9 @@ EndFunc
 Func PreparationAction_Click()
 	DisableAllControlls()
 	Local $previousActionResult = 1
+	If GUICtrlRead($CBX_Preparation_BuildIMSolution) = $GUI_CHECKED And $previousActionResult = 1 Then
+		$previousActionResult = BuildIMSolution("DebugNoTests")
+	EndIf
 	If GUICtrlRead($CBX_Preparation_RemoveOldMasterData) = $GUI_CHECKED And $previousActionResult = 1 Then
 		$previousActionResult = RemoveOldMasterData()
 	EndIf
@@ -207,28 +211,27 @@ EndFunc
 
 Func StartICSimulator()
 	SetSystemStatus("Running", "Starting IC Simulator.")
-	If FileExists($ICSimulatorPath & $ICSimulatorProcessName) Then
-		Run($ICSimulatorPath & $ICSimulatorProcessName, $ICSimulatorPath)
-		WinWait("IC Simulator")
-		SetSystemStatus("Ready", "IC Simulator started.")
+	Local $startICSimulator = StartNewProcess($ICSimulatorProcess[0], $ICSimulatorProcess[1], $ICSimulatorProcess[0], $ICSimulatorProcess[2], True, False)
+	If $startICSimulator = 0 Then
+		Return 1
 	Else
-		SetSystemStatus("Error", "Could not find simulator executalble.")
-		WriteLog("Could not find simulator: " & $ICSimulatorPath & $ICSimulatorProcessName)
-		Return -1
+		Return $startICSimulator
 	EndIf
-	Return 1
 EndFunc
 
 Func StartHL7Simulator()
 	SetSystemStatus("Running", "Starting HL7 Simulator.")
-	Global $HL7SimulatorPID = Run($ExternalToolPath_HL7InstallPath & $HL7ProcessName , $ExternalToolPath_HL7InstallPath)
-	;~ Accept the popup
-	Sleep(1000)
-	WinActivate("HL7 Host Interface Simulator [V 7.6]")
-	Send("{LEFT}")
-	Send("{ENTER}")
-	SetSystemStatus("Ready", "HL7 Simulator started.")
-	Return 1
+	Local $startHL7Simulator = StartNewProcess($HL7SimulatorProcess[0], $HL7SimulatorProcess[1], $HL7SimulatorProcess[0], $HL7SimulatorProcess[2], True, False)
+	If $startHL7Simulator = 0 Then
+		Return 1
+	ElseIf $startHL7Simulator = 1 Then
+		WinActivate($HL7SimulatorProcess[2])
+		Send("{LEFT}")
+		Send("{ENTER}")
+		Return 1
+	Else
+		Return -1
+	EndIf
 EndFunc
 
 Func StartIMSoftware()

@@ -1,0 +1,26 @@
+
+Source control
+=========================================================
+RKA-15-Oct-13:	Clean bin\Debug and bin\Release
+
+
+Roundtrip
+=========================================================
+RKA-15-Oct-13:	Roundtrip for GLUC3 calibration and sample order (wiht preparation)
+					Kill all processes
+					Clean db
+					Clean Logs
+					Clean old master data
+					Start HL7, IC Simulator, IM Software
+					[check] Copy master data to TsnDrop
+					[check] Install master data
+					[check] Assign the calibrator racks
+					[check] Load the racks (calibrator and sample)
+					[] Load the kits
+					[] Order and start calibration for GLUC3
+					[] Wait for result
+					Go to operating
+					Order sample order for Gluc3
+					Start the order
+					Wait for result
+					Go to operating

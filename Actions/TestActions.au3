@@ -1,13 +1,16 @@
 
 ;~ Declare all used checkboxes here to prevent warnings in the usage
 #region Checkbox declaration
-Global $CBX_Test
+Global $CBX_Test1
+Global $CBX_Test2
+Global $CBX_Test3
+Global $CBX_Test4
 
 Global $CBX_Test_All
 #endregion Checkbox declaration
 
 Func TestAction_Click()
-   If GUICtrlRead($CBX_Test) = $GUI_CHECKED Then
+   If GUICtrlRead($CBX_Test1) = $GUI_CHECKED Then
 	  RunTest_SystemStatus()
    EndIf
 EndFunc
